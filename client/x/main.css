@@ -1,0 +1,43 @@
+/*Aesthetic*/
+
+body {
+  background-color: #E9DCCD;
+}
+
+.navbar-my{
+  background-color: #36384C;
+}
+
+.navbartext{
+  padding-left: 20px;
+  font-size: 40px;
+  color: #E9DCCD;
+}
+
+.jumbotron-my{
+  background-color: #E3BAB3;
+  color: #613A43;
+}
+
+.decorimg {
+  padding: 5px;
+  border:5px solid #36384C;
+  background-color: White;
+  margin-left: 5px;
+}
+
+
+
+/*Animation Transition*/
+
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
+}

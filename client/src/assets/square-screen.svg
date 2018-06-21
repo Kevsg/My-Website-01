@@ -1,0 +1,47 @@
+<svg version="1.1" id="H1Frd4Ky7" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="400" height="300" viewBox="-190 -140 400 300" enable-background="new 0 0 20 20" xml:space="preserve"><style type="text/css">@-webkit-keyframes BJltruNKJ7_H1vEuSY1X_Animation {
+    0% {
+        -webkit-transform: scale(1, 1);
+                transform: scale(1, 1)
+    }
+    50% {
+        -webkit-transform: scale(1, 20);
+                transform: scale(1, 20)
+    }
+    100% {
+        -webkit-transform: scale(40, 20);
+                transform: scale(40, 20)
+    }
+}
+@keyframes BJltruNKJ7_H1vEuSY1X_Animation {
+    0% {
+        -webkit-transform: scale(1, 1);
+                transform: scale(1, 1)
+    }
+    50% {
+        -webkit-transform: scale(1, 20);
+                transform: scale(1, 20)
+    }
+    100% {
+        -webkit-transform: scale(40, 20);
+                transform: scale(40, 20)
+    }
+}
+#H1Frd4Ky7 * {
+    -webkit-animation-duration: 3s;
+            animation-duration: 3s;
+    -webkit-animation-timing-function: cubic-bezier(0, 0, 1, 1);
+            animation-timing-function: cubic-bezier(0, 0, 1, 1)
+}
+#BJltruNKJ7_H1vEuSY1X {
+    -webkit-animation-name: BJltruNKJ7_H1vEuSY1X_Animation;
+            animation-name: BJltruNKJ7_H1vEuSY1X_Animation;
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+    transform-box: fill-box;
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+    -webkit-animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
+            animation-timing-function: cubic-bezier(0, 0, 0.58, 1)
+}</style><style/>
+<g id="BJltruNKJ7_H1vEuSY1X" data-animator-group="true" data-animator-type="2"><rect width="20" height="20" id="BJltruNKJ7"/></g>
+<script>(function(){var a=document.querySelector('#H1Frd4Ky7'),b=a.querySelectorAll('style'),c=function(d){b.forEach(function(f){var g=f.textContent;g&amp;&amp;(f.textContent=g.replace(/transform-box:[^;\r\n]*/gi,'transform-box: '+d))})};c('initial'),window.requestAnimationFrame(function(){return c('fill-box')})})();</script></svg>

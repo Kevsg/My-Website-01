@@ -1,0 +1,24 @@
+/*Aesthetic*/
+
+body {
+  background-color:#E9DCCD;
+}
+
+.navbar-my{
+  background-color: #36384C;
+  margin-bottom: 0px;
+}
+
+.navbartext{
+  padding-left: 20px;
+  font-size: 40px;
+  color: #E9DCCD;
+}
+
+.label {
+     display: inline-block;
+}
+
+.navbar-brand {
+  margin-right: 10px;
+}
