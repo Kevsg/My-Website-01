@@ -4,11 +4,12 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import BootstrapVue from 'bootstrap-vue'
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 
-Vue.use(BootstrapVue)
+Vue.use(Vuetify)
+
+require('vue2-animate/dist/vue2-animate.min.css')
 
 // eslint-disable-next-line
 const app = new Vue({

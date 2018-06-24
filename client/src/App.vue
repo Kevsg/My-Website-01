@@ -1,50 +1,55 @@
 <template>
-  <div id="app">
-    <router-link to="/">
-      <nav class="navbar-my">
-        <a class="navbar-brand">
-          <img :src="image"  width="68" height="50" class="d-inline-block align-top">
-            <h1 class="navbartext d-inline-block">Pacifist</h1>
-        </a>
-        <a class="d-inline-block"></a>
-     </nav>
-   </router-link>
-    <router-view></router-view>
-  </div>
+<div>
+  <v-toolbar class="navbar">
+    <v-toolbar-title class="navbartitle">Pacifist # 11187 (This is my Battle.net ID)</v-toolbar-title>
+    <v-spacer></v-spacer>
+    <v-toolbar-items>
+      <v-btn flat class="navbaritem" :to="{name: 'Home'}" >Home</v-btn>
+      <v-btn flat class="navbaritem" :to="{name: 'About'}" >About</v-btn>
+      <v-btn flat class="navbaritem" :to="{name: 'Contact'}">Contact</v-btn>
+    </v-toolbar-items>
+  </v-toolbar>
+  <router-view></router-view>
+</div>
 </template>
 
 <script>
-import image from './assets/simple-logo2.png'
+import Home from '@/components/Home'
+import About from '@/components/About'
+import Contact from '@/components/Contact'
 
 export default {
   name: 'App',
-  data: function () {
-    return {
-      image: image
-    }
+  components: {
+    Home,
+    About,
+    Contact
   }
 }
 </script>
 <style scoped>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  margin-top: 0px;
-  background-color: #E9DCCD;
-  min-width: 100vw;
-  min-height: 100vh;
-}
-
-.navbar-my{
+.navbar{
   background-color: #36384C;
-  display: flex;
 }
 
-.navbartext{
-  padding-left: 10px;
-  font-size: 40px;
-  color: #E9DCCD;
+.navbartitle{
+  text-transform: none;
+  font-family: Georgia;
+  color:white;
+  font-size: 24px;
 }
+
+.navbaritem{
+  text-transform: none;
+  font-family: Georgia;
+  color:white;
+  font-size: 16px;
+}
+
+.home {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  width: 100%;
+}
+
 </style>
