@@ -33,11 +33,11 @@ export default {
 
 <style scoped>
 .APP {
-  background-color: #E9DCCD;
+  background-color: #EFEBE9;
 }
 
 .navbar{
-  background-color: #36384C;
+  background-color: #3E2723;
 }
 
 .navbartitle{
