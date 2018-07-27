@@ -1,33 +1,41 @@
 <template>
-<div>
+<v-app class="APP">
   <v-toolbar class="navbar">
     <v-toolbar-title class="navbartitle">Pacifist # 11187 (This is my Battle.net ID)</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-items>
-      <v-btn flat class="navbaritem" :to="{name: 'Home'}" >Home</v-btn>
-      <v-btn flat class="navbaritem" :to="{name: 'About'}" >About</v-btn>
+      <v-btn flat class="navbaritem" :to="{name: 'HomePage'}" >Home</v-btn>
+      <v-btn flat class="navbaritem" :to="{name: 'About'}">About</v-btn>
+      <v-btn flat class="navbaritem" :to="{name: 'AnimationPage'}" >Animation</v-btn>
       <v-btn flat class="navbaritem" :to="{name: 'Contact'}">Contact</v-btn>
     </v-toolbar-items>
   </v-toolbar>
   <router-view></router-view>
-</div>
+</v-app>
 </template>
 
 <script>
-import Home from '@/components/Home'
+import HomePage from '@/components/HomePage'
 import About from '@/components/About'
 import Contact from '@/components/Contact'
+import AnimationPage from '@/components/AnimationPage'
 
 export default {
   name: 'App',
   components: {
-    Home,
+    HomePage,
     About,
-    Contact
+    Contact,
+    AnimationPage
   }
 }
 </script>
+
 <style scoped>
+.APP {
+  background-color: #E9DCCD;
+}
+
 .navbar{
   background-color: #36384C;
 }

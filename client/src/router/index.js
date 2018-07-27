@@ -1,11 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/Home'
+import HomePage from '@/components/HomePage'
+import AnimationPage from '@/components/AnimationPage'
 import FirstRoute from '@/components/FirstRoute'
 import FirstRouteChild from '@/components/FirstRouteChild'
 import AnimationShowcase from '@/components/AnimationShowcase'
 import About from '@/components/About'
 import Contact from '@/components/Contact'
+// index.js or main.js
+import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 
 Vue.use(Router)
 
@@ -13,8 +16,13 @@ export default new Router({
   routes: [
     {
       path: '/home',
-      name: 'Home',
-      component: Home
+      name: 'HomePage',
+      component: HomePage
+    },
+    {
+      path: '/animation',
+      name: 'AnimationPage',
+      component: AnimationPage
     },
     {
       path: '/firstroute/:name',
@@ -44,7 +52,7 @@ export default new Router({
     },
     {
       path: '*',
-      redirect: 'Home'
+      redirect: '/home'
     }
   ]
 })

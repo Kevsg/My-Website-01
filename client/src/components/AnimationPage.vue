@@ -1871,14 +1871,14 @@
 </div>
 <!-- svg block !-->
 
-<v-btn class="clicker mt-3" v-on:click="beginAnimation">Click me!</v-btn>
+<v-btn dark class="clicker mt-3" v-on:click="beginAnimation">Click me!</v-btn>
 
 </div>
 </template>
 
 <script>
 export default {
-  name: 'Home',
+  name: 'AnimationPage',
   methods: {
 	toggleBuilding: function () {
 		this.showBuilding = !this.showBuilding
