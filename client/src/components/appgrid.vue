@@ -40,7 +40,7 @@ export default {
 
 <style scoped>
 .decorimg {
-    padding: 5px;
+
     border: 5px solid #36384C;
     background-color: White;
     margin-left: 5px;

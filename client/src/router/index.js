@@ -7,6 +7,8 @@ import FirstRouteChild from '@/components/FirstRouteChild'
 import AnimationShowcase from '@/components/AnimationShowcase'
 import About from '@/components/About'
 import Contact from '@/components/Contact'
+import Insert from '@/components/Insert'
+import Delete from '@/components/Delete'
 // index.js or main.js
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 
@@ -49,6 +51,16 @@ export default new Router({
       path: '/contact',
       name: 'Contact',
       component: Contact
+    },
+    {
+      path: '/insert',
+      name: 'Insert',
+      component: Insert
+    },
+    {
+      path: '/delete',
+      name: 'Delete',
+      component: Delete
     },
     {
       path: '*',
