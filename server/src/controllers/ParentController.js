@@ -2,10 +2,20 @@ const connection = require('../db.js')
 
 module.exports = {
   async insert (req, res) {
-    connection.query('SELECT * from account', function (error, results, fields) {
+    console.log(req.body)
+    let parent = req.body
+    var query = connection.query('INSERT INTO parent SET ?', parent, function (error, results, fields) {
       if (error) throw error
-      console.log(results[0].balance)
-      return results[0].balance
+      // Neat!
     })
+    console.log(query.sql) // INSERT INTO posts SET `id` = 1, `title` = 'Hello MySQL'
+    return 1
+    /*
+    connection.query(`INSERT INTO parent`, function (error, results, fields) {
+      if (error) throw error
+      console.log(results)
+      return results
+    })
+    */
   }
 }

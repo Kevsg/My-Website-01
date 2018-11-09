@@ -24,8 +24,8 @@
         ></v-text-field>
 
         <v-text-field
-        v-model="tel"
-        label="Teleplone"
+        v-model="telephone"
+        label="Telephone"
         required
         ></v-text-field>
 
@@ -36,7 +36,7 @@
         ></v-text-field>
 
         <v-text-field
-        v-model="addr"
+        v-model="address"
         label="Address"
         required
         ></v-text-field>
@@ -55,13 +55,10 @@ export default {
     return {
         pid: '',
         name: '',
-        
         gender: '',
-        tel: '',
-        
+        telephone: '',
         email: '',
-        addr: ''
-        
+        address: ''
       }
   },
   async mounted () {
@@ -69,15 +66,17 @@ export default {
   },
   methods: {
     insert: function () {
+      // eslint-disable-next-line
       console.log('insert data')
+      // eslint-disable-next-line
       console.log(this.name)
       let parent = {
           pid: this.pid,
           name: this.name,
           gender: this.gender,
-          tel: this.tel,
+          telephone: this.telephone,
           email: this.email,
-          addr: this.addr
+          address: this.address
       }
       ParentService.insertParent(parent)
     }

@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HomePage from '@/components/HomePage'
-import AnimationPage from '@/components/AnimationPage'
 import FirstRoute from '@/components/FirstRoute'
 import FirstRouteChild from '@/components/FirstRouteChild'
 import AnimationShowcase from '@/components/AnimationShowcase'
@@ -20,11 +19,6 @@ export default new Router({
       path: '/home',
       name: 'HomePage',
       component: HomePage
-    },
-    {
-      path: '/animation',
-      name: 'AnimationPage',
-      component: AnimationPage
     },
     {
       path: '/firstroute/:name',

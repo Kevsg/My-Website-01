@@ -1,18 +1,12 @@
 <template>
 <div>
-<!-- this use to be profile with back background
-  <section class="black herosection pt-5">
-    <img src="../assets/profile.jpg" class="profile"/>
-    <v-btn class="clicker mt-3" v-on:click="hello">Click me!</v-btn>
-  </section>
-!-->
 
 <!-- svg block !-->
 <div class="svggrid">
 <div class="svgcontainer">
 <svg version="1.0" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
-	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-	 x="0px" y="0px" width="1280px" height="800px" viewBox="0 0 1280 800" enable-background="new 0 0 1280 800" xml:space="preserve"
+	xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+	x="0px" y="0px" width="1280px" height="800px" viewBox="0 0 1280 800" enable-background="new 0 0 1280 800" xml:space="preserve"
 	>
 <g id="background" display="none">
 	<rect display="inline" fill="#110015" width="1280" height="800"/>
@@ -1882,16 +1876,12 @@ export default {
   methods: {
 	toggleBuilding: function () {
 		this.showBuilding = !this.showBuilding
-		setTimeout(() => {
-      		this.toggleMoon()
-    	}, 1000)
+		setTimeout(() => {this.toggleMoon()}, 1000)
 	},
 	toggleMoon: function () {
 		this.moonClass = 'slideDown'
 		this.showMoon = !this.showMoon
-		setTimeout(() => {
-      		this.toggleCloud()
-    	}, 1000)
+		setTimeout(() => {this.toggleCloud()}, 1000)
 	},
 	toggleCloud: function () {
 		this.showCloud = !this.showCloud
@@ -1904,13 +1894,13 @@ export default {
   },
   data: function () {
     return {
-	  show: true,
-	  showMoon: false,
-	  showBuilding: false,
-	  showCloud: false,
-	  moonClass: '',
-	  outerGlow: '',
-	  middleGlow: ''
+		show: true,
+		showMoon: false,
+		showBuilding: false,
+		showCloud: false,
+		moonClass: '',
+		outerGlow: '',
+		middleGlow: ''
     }
   },
   created () {
