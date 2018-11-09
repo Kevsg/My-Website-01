@@ -1,12 +1,11 @@
+const connection = require('../db.js')
+
 module.exports = {
   async insert (req, res) {
-    console.log(req.body)
-    try {
-      // insert into database
-    } catch (err) {
-      res.status(500).send({
-        error: 'an error has occured trying to insert parent'
-      })
-    }
+    connection.query('SELECT * from account', function (error, results, fields) {
+      if (error) throw error
+      console.log(results[0].balance)
+      return results[0].balance
+    })
   }
 }

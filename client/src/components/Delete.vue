@@ -11,8 +11,6 @@
 </template>
 
 <script>
-import AboutService from '@/services/AboutService'
-
 export default {
   data () {
     return {

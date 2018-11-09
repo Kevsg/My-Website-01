@@ -9,12 +9,12 @@ import About from '@/components/About'
 import Contact from '@/components/Contact'
 import Insert from '@/components/Insert'
 import Delete from '@/components/Delete'
-// index.js or main.js
-import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
+  base: process.env.BASE_URL,
   routes: [
     {
       path: '/home',

@@ -1,22 +1,13 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-// this is app entry point
 import Vue from 'vue'
-import App from './App'
+import './plugins/vuetify'
+import App from './App.vue'
 import router from './router'
+import store from './store'
 
-import Vuetify from 'vuetify'
+Vue.config.productionTip = false
 
-Vue.use(Vuetify)
-
-require('vue2-animate/dist/vue2-animate.min.css')
-
-// eslint-disable-next-line
-const app = new Vue({
-  el: '#app',
+new Vue({
   router,
-  components: { App },
-  template: '<App/>'
-})
-
-console.log(process.env.PORT)
+  store,
+  render: h => h(App)
+}).$mount('#app')
