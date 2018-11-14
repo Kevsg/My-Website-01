@@ -217,8 +217,16 @@ import ParentService from '@/services/ParentService.js'
       },
       //delete
       deleteItem (item) {
-        const index = this.parents.indexOf(item)
-        confirm('Are you sure you want to delete this item?') && this.parents.splice(index, 1)
+        ParentService.deleteParent(item.pid).then((res) => {
+          if(res.data == 'Error') {
+            //do something to handle error
+            alert('Error trying to delete parent info.')
+          } else {
+            const index = this.parents.indexOf(item)
+            this.parents.splice(index, 1)
+          }
+
+        })
       },
       //close popup
       closeI () {
@@ -249,7 +257,6 @@ import ParentService from '@/services/ParentService.js'
           //do something to handle error
             alert('Error trying to insert parent info.')
         } else {
-          console.log(res)
           if (this.editedIndex > -1) {
             Object.assign(this.parents[this.editedIndex], this.editedItem)
           } else {
@@ -263,7 +270,6 @@ import ParentService from '@/services/ParentService.js'
       },
       //update
       saveU () {
-        console.log(this.editedItem.pid)
         let parent = {        
             pid: this.editedItem.pid,
             Name: this.editedItem.Name,
@@ -277,7 +283,6 @@ import ParentService from '@/services/ParentService.js'
           //do something to handle error
             alert('Error trying to update parent info.')
         } else {
-          console.log(res)
           if (this.editedIndex > -1) {
             Object.assign(this.parents[this.editedIndex], this.editedItem)
           } else {
