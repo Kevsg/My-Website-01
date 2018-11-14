@@ -1,21 +1,45 @@
 const connection = require('../db.js')
 
 module.exports = {
+  async index (req, res) {
+    connection.query('SELECT * from parent', function (err, rows, fields) {
+      if (err) throw err
+      console.log('The solution is: ', rows)
+      res.send(rows)
+    })
+  },
   async insert (req, res) {
     console.log(req.body)
     let parent = req.body
-    var query = connection.query('INSERT INTO parent SET ?', parent, function (error, results, fields) {
-      if (error) throw error
-      // Neat!
+    var query = await connection.query('INSERT INTO parent SET ?', parent, function (error, results, fields) {
+      if (error) { console.log('Error -- Trying to insert parent data'); res.status(200).send('Error') } else {
+        console.log(query.sql)
+        res.send(results)
+      }
     })
-    console.log(query.sql) // INSERT INTO posts SET `id` = 1, `title` = 'Hello MySQL'
-    return 1
-    /*
-    connection.query(`INSERT INTO parent`, function (error, results, fields) {
-      if (error) throw error
-      console.log(results)
-      return results
+  },
+  async update (req, res) {
+    console.log('Update function activate')
+    console.log(req.body)
+    var query = await connection.query('UPDATE parent SET ? WHERE pid = ?', [req.body, req.body.pid], function (error, results, fields) {
+      if (error) { console.log('Error -- Trying to Update parent data'); res.status(200).send('Error') } else {
+        console.log(query.sql)
+        console.log('/n')
+        console.log(results)
+        res.send('Update Complete')
+      }
     })
-    */
+    // UPDATE parent SET pid = 90 WHERE pid = ?
+  },
+  async delete (req, res) {
+    console.log('Backend Delete function')
+    let pid = req.params.id
+    console.log(pid)
+    var query = await connection.query('DELETE FROM parent WHERE `pid` = ?;', pid, function (error, results, fields) {
+      if (error) { console.log('Error -- Trying to Delete parent data'); res.status(200).send('Error') } else {
+        console.log(query.sql)
+        res.send('Delete Complete')
+      }
+    })
   }
 }

@@ -1,6 +1,9 @@
 import Api from '@/services/Api'
 
 export default {
+  index() {
+    return Api().get('parent/index')
+  },
   insertParent (parent) {
     // eslint-disable-next-line no-console
     console.log(parent)
@@ -10,6 +13,6 @@ export default {
     return Api().delete(`parent/delete/${id}`)
   },
   updateParent (id, parent) {
-    return Api.post(`parent/update/${id}`,parent)
+    return Api().put(`parent/update/${id}`, parent)
   }
 }

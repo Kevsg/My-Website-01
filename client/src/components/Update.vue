@@ -1,6 +1,6 @@
 <template>
-  <div class="Insert">
-    <h1>Insert</h1>
+  <div class="Update">
+    <h1>Update</h1>
     <v-form>
 
         <v-text-field
@@ -40,7 +40,7 @@
         ></v-text-field>
 
     </v-form>
-    <v-btn primary v-on:click="insert">Add</v-btn>
+    <v-btn primary v-on:click="update">Add</v-btn>
     <ResultList></ResultList>
   </div>
 </template>
@@ -64,9 +64,9 @@ export default {
     'ResultList': ResultList
   },
   methods: {
-    insert: function () {
+    update: function () {
       // eslint-disable-next-line
-      console.log('insert data')
+      console.log('update data')
       // eslint-disable-next-line
       console.log(this.name)
       let parent = {
@@ -77,10 +77,10 @@ export default {
           email: this.email,
           address: this.address
       }
-      ParentService.insertParent(parent).then(res => {
+      ParentService.updateParent(parent.pid,parent).then(res => {
         if(res.data == 'Error') {
           //do something to handle error
-          alert('Error trying to insert parent info.')
+          alert('Error trying to update parent info.')
         }
       })
     }

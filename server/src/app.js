@@ -21,11 +21,6 @@ var connection = mysql.createConnection({
 
 connection.connect()
 
-connection.query('SELECT 1 + 1 AS solution', function (err, rows, fields) {
-  if (err) { throw (err) }
-  console.log('The solution is: ', rows[0].solution)
-  app.listen(config.port)
-  console.log(`Server started on port ${config.port}`)
-})
+app.listen(config.port)
 
 connection.end()

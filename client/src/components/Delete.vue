@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import ParentService from '@/services/ParentService'
+
 export default {
   data () {
     return {
@@ -22,8 +24,16 @@ export default {
   },
   methods: {
     delete: function () {
-      console.log('Delete data')
+      // eslint-disable-next-line
+      console.log('Delete data id of : ',this.pid)
       //delete Parent
+      ParentService.deleteParent(this.pid).then((res) => {
+        if(res.data == 'Error') {
+          //do something to handle error
+          alert('Error trying to delete parent info.')
+        }
+      })
+
     }
   }
   

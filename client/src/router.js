@@ -8,6 +8,9 @@ import About from '@/components/About'
 import Contact from '@/components/Contact'
 import Insert from '@/components/Insert'
 import Delete from '@/components/Delete'
+import Update from '@/components/Update'
+import CRUDE from '@/components/CRUDE'
+
 
 Vue.use(Router)
 
@@ -56,6 +59,17 @@ export default new Router({
       name: 'Delete',
       component: Delete
     },
+    {
+      path: '/update',
+      name: 'Update',
+      component: Update
+    },
+    {
+      path: '/crude',
+      name: 'CRUDE',
+      component: CRUDE
+    },
+    
     {
       path: '*',
       redirect: '/home'

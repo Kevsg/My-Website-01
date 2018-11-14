@@ -1,18 +1,12 @@
 <template>
 <div class="home">
-  <Result-List/>
-  <Insert/>
+  <h1>Homepage</h1>
 </div>
 </template>
 
 <script>
-import Insert from './Insert.vue'
-
 export default {
-  name: 'HomePage',
-  components: {
-    Insert
-  },
+  name: 'HomePage'
 }
 </script>
 
