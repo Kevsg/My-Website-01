@@ -1,13 +1,22 @@
 <template>
   <div>
+     <v-alert
+      v-model="alert"
+      dismissible
+      type="error"
+    >
+      {{this.errorMessage}}
+    </v-alert>
     <v-toolbar flat color="white">
-      <v-toolbar-title>My CRUD</v-toolbar-title>
+      <v-toolbar-title primary>Parent Table</v-toolbar-title>
       <v-divider
         class="mx-2"
         inset
         vertical
       ></v-divider>
       <v-spacer></v-spacer>
+
+     
 
       <v-dialog v-model="dialogI" max-width="500px">
         <v-btn slot="activator" color="primary" dark class="mb-2">New Item</v-btn>
@@ -20,7 +29,7 @@
             <v-container grid-list-md>
               <v-layout wrap>
                 <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.pid" label="Parent ID"></v-text-field>
+                  <v-text-field v-model="editedItem.ParentID" label="Parent ID"></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm6 md4>
                   <v-text-field v-model="editedItem.Name" label="Name"></v-text-field>
@@ -60,7 +69,7 @@
             <v-container grid-list-md>
               <v-layout wrap>
                 <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.pid" label="Parent ID"></v-text-field>
+                  <v-text-field disabled v-model="editedItem.ParentID" label="Parent ID"></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm6 md4>
                   <v-text-field v-model="editedItem.Name" label="Name"></v-text-field>
@@ -96,7 +105,7 @@
       class="elevation-1"
     >
       <template slot="items" slot-scope="props">
-        <td>{{ props.item.pid }}</td>
+        <td>{{ props.item.ParentID }}</td>
         <td class="text-xs-right">{{ props.item.Name }}</td>
         <td class="text-xs-right">{{ props.item.Gender }}</td>
         <td class="text-xs-right">{{ props.item.Telephone }}</td>
@@ -131,14 +140,15 @@ import ParentService from '@/services/ParentService.js'
 
   export default {
     data: () => ({
-      dialog: false,
       dialogI: false,
       dialogU: false,
+      alert: false,
+      errorMessage: '',
       headers: [
         {
           text: 'Parent ID',
           align: 'left',
-          sortable: false,
+          sortable: true,
           value: 'name'
         },
         { text: 'Name', align: 'right',value: 'Name' },
@@ -151,7 +161,7 @@ import ParentService from '@/services/ParentService.js'
       desserts: [],parents: [],
       editedIndex: -1,
       editedItem: {
-        'pid' : '',
+        'ParentID' : '',
         'Name': '',
         'Gender': '',
         'Telephone': '',
@@ -159,7 +169,7 @@ import ParentService from '@/services/ParentService.js'
         'Address': ''
       },
       defaultItem: {
-        'pid' : '',
+        'ParentID' : '',
         'Name': '',
         'Gender': '',
         'Telephone': '',
@@ -192,7 +202,7 @@ import ParentService from '@/services/ParentService.js'
       initialize () {
         this.parents = [
           {
-            pid: 'Frozen Yogurt',
+            ParentID: 'Frozen Yogurt',
             Name: 159,
             Gender: 6.0,
             Telephone: 24,
@@ -200,7 +210,7 @@ import ParentService from '@/services/ParentService.js'
             Address: 'Albama'
           },
           {
-            pid: 'Assanee WongPreeChaikul',
+            ParentID: 'Assanee WongPreeChaikul',
             Name: 188,
             Gender: 79,
             Telephone: 22,
@@ -217,10 +227,10 @@ import ParentService from '@/services/ParentService.js'
       },
       //delete
       deleteItem (item) {
-        ParentService.deleteParent(item.pid).then((res) => {
+        ParentService.deleteParent(item.ParentID).then((res) => {
           if(res.data == 'Error') {
             //do something to handle error
-            alert('Error trying to delete parent info.')
+            this.error = true
           } else {
             const index = this.parents.indexOf(item)
             this.parents.splice(index, 1)
@@ -246,7 +256,7 @@ import ParentService from '@/services/ParentService.js'
       //insert
       async saveI () {
         let parent = {        
-            pid: this.editedItem.pid,
+            ParentID: this.editedItem.ParentID,
             Name: this.editedItem.Name,
             Gender: this.editedItem.Gender,
             Telephone: this.editedItem.Telephone,
@@ -256,6 +266,7 @@ import ParentService from '@/services/ParentService.js'
         if(res.data == 'Error') {
           //do something to handle error
             alert('Error trying to insert parent info.')
+            this.alert = true
         } else {
           if (this.editedIndex > -1) {
             Object.assign(this.parents[this.editedIndex], this.editedItem)
@@ -271,7 +282,7 @@ import ParentService from '@/services/ParentService.js'
       //update
       saveU () {
         let parent = {        
-            pid: this.editedItem.pid,
+            ParentID: this.editedItem.ParentID,
             Name: this.editedItem.Name,
             Gender: this.editedItem.Gender,
             Telephone: this.editedItem.Telephone,
@@ -281,7 +292,8 @@ import ParentService from '@/services/ParentService.js'
         ParentService.updateParent(parent.id, parent).then(res => {
         if(res.data == 'Error') {
           //do something to handle error
-            alert('Error trying to update parent info.')
+            this.errorMessage = 'Error trying to update parent info.'
+            this.alert = true
         } else {
           if (this.editedIndex > -1) {
             Object.assign(this.parents[this.editedIndex], this.editedItem)

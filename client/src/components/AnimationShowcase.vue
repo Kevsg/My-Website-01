@@ -102,7 +102,6 @@ export default {
   margin: auto;
   display: block;
   border: solid 2px #41b883;
-  margin-top: 8%;
 }
 
 .vueconf-logo {

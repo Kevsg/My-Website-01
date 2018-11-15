@@ -9,7 +9,12 @@ import Contact from '@/components/Contact'
 import Insert from '@/components/Insert'
 import Delete from '@/components/Delete'
 import Update from '@/components/Update'
-import CRUDE from '@/components/CRUDE'
+import parentCRUDE from '@/components/parentCRUDE'
+import studentCRUDE from '@/components/studentCRUDE'
+import announcementCRUDE from '@/components/announcementCRUDE'
+import homeworkCRUDE from '@/components/homeworkCRUDE'
+import attendanceCRUDE from '@/components/attendanceCRUDE'
+import scheduleCRUDE from '@/components/scheduleCRUDE'
 
 
 Vue.use(Router)
@@ -65,11 +70,35 @@ export default new Router({
       component: Update
     },
     {
-      path: '/crude',
-      name: 'CRUDE',
-      component: CRUDE
+      path: '/parent-crude',
+      name: 'parent-crude',
+      component: parentCRUDE
     },
-    
+    {
+      path: '/student-crude',
+      name: 'student-crude',
+      component: studentCRUDE
+    },
+    {
+      path: '/announcement-crude',
+      name: 'announcement-crude',
+      component: announcementCRUDE
+    },
+    {
+      path: '/homework-crude',
+      name: 'homework-crude',
+      component: homeworkCRUDE
+    },
+    {
+      path: '/attendance-crude',
+      name: 'attendace-crude',
+      component: attendanceCRUDE
+    },
+    {
+      path: '/schedule-crude',
+      name: 'schedule-crude',
+      component: scheduleCRUDE
+    },
     {
       path: '*',
       redirect: '/home'

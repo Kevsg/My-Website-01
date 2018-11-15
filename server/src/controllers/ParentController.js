@@ -21,7 +21,7 @@ module.exports = {
   async update (req, res) {
     console.log('Update function activate')
     console.log(req.body)
-    var query = await connection.query('UPDATE parent SET ? WHERE pid = ?', [req.body, req.body.pid], function (error, results, fields) {
+    var query = await connection.query('UPDATE parent SET ? WHERE ParentID = ?', [req.body, req.body.ParentID], function (error, results, fields) {
       if (error) { console.log('Error -- Trying to Update parent data'); res.status(200).send('Error') } else {
         console.log(query.sql)
         console.log('/n')
@@ -35,7 +35,7 @@ module.exports = {
     console.log('Backend Delete function')
     let pid = req.params.id
     console.log(pid)
-    var query = await connection.query('DELETE FROM parent WHERE `pid` = ?;', pid, function (error, results, fields) {
+    var query = await connection.query('DELETE FROM parent WHERE `ParentID` = ?;', pid, function (error, results, fields) {
       if (error) { console.log('Error -- Trying to Delete parent data'); res.status(200).send('Error') } else {
         console.log(query.sql)
         res.send('Delete Complete')
