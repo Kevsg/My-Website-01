@@ -2,7 +2,7 @@ const connection = require('../db.js')
 
 module.exports = {
   async index (req, res) {
-    connection.query('SELECT * from student', function (err, rows, fields) {
+    connection.query('SELECT * from student', function (err, rows) {
       if (err) throw err
       console.log('The solution is: ', rows)
       res.send(rows)

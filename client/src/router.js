@@ -15,7 +15,8 @@ import announcementCRUDE from '@/components/announcementCRUDE'
 import homeworkCRUDE from '@/components/homeworkCRUDE'
 import attendanceCRUDE from '@/components/attendanceCRUDE'
 import scheduleCRUDE from '@/components/scheduleCRUDE'
-
+import StudentWork from '@/components/StudentWork'
+import AbsentStudent from '@/components/AbsentStudent'
 
 Vue.use(Router)
 
@@ -98,6 +99,31 @@ export default new Router({
       path: '/schedule-crude',
       name: 'schedule-crude',
       component: scheduleCRUDE
+    },
+    {
+      path: '/student-work',
+      name: 'studentwork',
+      component: StudentWork
+    },
+    {
+      path: '/absent-student',
+      name: 'absent-student',
+      component: AbsentStudent
+    },
+    {
+      path: '/school-activity',
+      name: 'school-activity',
+      component: StudentWork
+    },
+    {
+      path: '/teacher-student',
+      name: 'teacher-student',
+      component: StudentWork
+    },
+    {
+      path: '/course-grade',
+      name: 'course-grade',
+      component: StudentWork
     },
     {
       path: '*',

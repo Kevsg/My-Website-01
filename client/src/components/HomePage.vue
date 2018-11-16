@@ -12,11 +12,11 @@
   </div>
 
   <div class="button-container">
-  <router-link to=''><v-btn class="ml-5 noButtonColor">Check annoucement Status</v-btn></router-link>
-  <router-link to=''><v-btn class="ml-5 noButtonColor">Submit homework</v-btn></router-link>
-  <router-link to=''><v-btn class="ml-5 noButtonColor">See student schedule</v-btn></router-link>
-  <router-link to=''><v-btn class="ml-5 noButtonColor">Check attendance</v-btn></router-link>
-  <router-link to=''><v-btn class="ml-5 noButtonColor">See student attendance</v-btn></router-link>
+  <router-link to='/student-work'><v-btn class="ml-5 noButtonColor">Get Work By Student ID</v-btn></router-link>
+  <router-link to='/absent-student'><v-btn class="ml-5 noButtonColor">Get absent Student by day</v-btn></router-link>
+  <router-link to='/school-activity'><v-btn class="ml-5 noButtonColor">Get School Activity</v-btn></router-link>
+  <router-link to='/teacher-student'><v-btn class="ml-5 noButtonColor">Find Teacher's Student</v-btn></router-link>
+  <router-link to='/course-grade'><v-btn class="ml-5 noButtonColor">Get Student Grade in Course</v-btn></router-link>
   </div>
 
   

@@ -6,6 +6,7 @@ const HomeworkController = require('/controllers/HomeworkController')
 const AttendanceController = require('/controllers/AttendanceController')
 const ScheduleController = require('/controllers/ScheduleController')
 */
+const QueryController = require('./controllers/QueryController')
 
 module.exports = (app) => {
   // Parent Route
@@ -40,4 +41,11 @@ module.exports = (app) => {
   app.put('/schedule/update/:id', ScheduleController.update)
   app.delete('/schedule/delete/:id', ScheduleController.delete)
   */
+
+  // Query Route
+  app.get('/student-work', QueryController.studentWork)
+  app.get('/absent-student', QueryController.absentStudent)
+  app.get('/school-activity', QueryController.schoolActivity)
+  app.get('/teacher-student', QueryController.teacherStudent)
+  app.get('/course-grade', QueryController.courseGrade)
 }
