@@ -21,7 +21,7 @@ module.exports = {
   async update (req, res) {
     console.log('Update function activate')
     console.log(req.body)
-    var query = await connection.query('UPDATE student SET ? WHERE StudentID = ?', [req.body, req.body.ParentID], function (error, results, fields) {
+    var query = await connection.query('UPDATE student SET ? WHERE StudentID = ?', [req.body, req.body.StudentID], function (error, results, fields) {
       if (error) { console.log('Error -- Trying to Update student data'); res.status(200).send('Error') } else {
         console.log(query.sql)
         console.log('/n')

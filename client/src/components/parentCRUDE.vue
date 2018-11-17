@@ -265,7 +265,7 @@ import ParentService from '@/services/ParentService.js'
         ParentService.insertParent(parent).then(res => {
         if(res.data == 'Error') {
           //do something to handle error
-            alert('Error trying to insert parent info.')
+            this.errorMessage = 'Error trying to insert parent info.'
             this.alert = true
         } else {
           if (this.editedIndex > -1) {
@@ -291,7 +291,6 @@ import ParentService from '@/services/ParentService.js'
 
         ParentService.updateParent(parent.id, parent).then(res => {
         if(res.data == 'Error') {
-          //do something to handle error
             this.errorMessage = 'Error trying to update parent info.'
             this.alert = true
         } else {
@@ -302,13 +301,6 @@ import ParentService from '@/services/ParentService.js'
           }
         }
         })
-        
-
-        if (this.editedIndex > -1) {
-          Object.assign(this.parents[this.editedIndex], this.editedItem)
-        } else {
-          this.parents.push(this.editedItem)
-        }
         this.closeU()
       },
       async getData () {

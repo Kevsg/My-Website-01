@@ -1,11 +1,11 @@
 const ParentController = require('./controllers/ParentController')
-/*
-const StudentController = require('/controllers/StudentController')
-const AnnouncementController = require('/controllers/AnnouncementController')
-const HomeworkController = require('/controllers/HomeworkController')
-const AttendanceController = require('/controllers/AttendanceController')
-const ScheduleController = require('/controllers/ScheduleController')
-*/
+
+const StudentController = require('./controllers/StudentController')
+const AnnouncementController = require('./controllers/AnnouncementController')
+const HomeworkController = require('./controllers/HomeworkController')
+const AttendanceController = require('./controllers/AttendanceController')
+const SubjectController = require('./controllers/SubjectController')
+
 const QueryController = require('./controllers/QueryController')
 
 module.exports = (app) => {
@@ -14,7 +14,6 @@ module.exports = (app) => {
   app.post('/parent/insert', ParentController.insert)
   app.put('/parent/update/:id', ParentController.update)
   app.delete('/parent/delete/:id', ParentController.delete)
-  /*
   // Student Route
   app.get('/student/index', StudentController.index)
   app.post('/student/insert', StudentController.insert)
@@ -30,22 +29,21 @@ module.exports = (app) => {
   app.post('/homework/insert', HomeworkController.insert)
   app.put('/homework/update/:id', HomeworkController.update)
   app.delete('/homework/delete/:id', HomeworkController.delete)
+
   // Attendance Route
   app.get('/attendance/index', AttendanceController.index)
   app.post('/attendance/insert', AttendanceController.insert)
   app.put('/attendance/update/:id', AttendanceController.update)
   app.delete('/attendance/delete/:id', AttendanceController.delete)
-  // Schedule Route
-  app.get('/schedule/index', ScheduleController.index)
-  app.post('/schedule/insert', ScheduleController.insert)
-  app.put('/schedule/update/:id', ScheduleController.update)
-  app.delete('/schedule/delete/:id', ScheduleController.delete)
-  */
-
+  // Subject Route
+  app.get('/subject/index', SubjectController.index)
+  app.post('/subject/insert', SubjectController.insert)
+  app.put('/subject/update/:id', SubjectController.update)
+  app.delete('/subject/delete/:id', SubjectController.delete)
   // Query Route
-  app.get('/student-work', QueryController.studentWork)
-  app.get('/absent-student', QueryController.absentStudent)
+  app.get('/student-work/:sid', QueryController.studentWork)
+  app.get('/absent-student/:classID&:day', QueryController.absentStudent)
   app.get('/school-activity', QueryController.schoolActivity)
-  app.get('/teacher-student', QueryController.teacherStudent)
-  app.get('/course-grade', QueryController.courseGrade)
+  app.get('/teacher-student/:teacherName', QueryController.teacherStudent)
+  app.get('/course-grade/:sID&:year', QueryController.courseGrade)
 }

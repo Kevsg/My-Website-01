@@ -8,7 +8,7 @@
   <router-link to='/announcement-crude'><v-btn class="ml-5 noButtonColor" dark>Annoucement Table</v-btn></router-link>
   <router-link to='/homework-crude'><v-btn class="ml-5 noButtonColor" dark>Homework Table</v-btn></router-link>
   <router-link to='/attendance-crude'><v-btn class="ml-5 noButtonColor" dark>Attendance Table</v-btn></router-link>
-  <router-link to='/schedule-crude'><v-btn class="ml-5 noButtonColor" dark>Schedule Control</v-btn></router-link>
+  <router-link to='/subject-crude'><v-btn class="ml-5 noButtonColor" dark>Subject Control</v-btn></router-link>
   </div>
 
   <div class="button-container">

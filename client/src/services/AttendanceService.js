@@ -9,8 +9,8 @@ export default {
     console.log(attendance)
     return Api().post('attendance/insert', attendance)
   },
-  deleteAttendance (id) {
-    return Api().delete(`attendance/delete/${id}`)
+  deleteAttendance (attendance) {
+    return Api().delete(`attendance/delete/${attendance.StudentID}`, attendance)
   },
   updateAttendance (id, attendance) {
     return Api().put(`attendance/update/${id}`, attendance)

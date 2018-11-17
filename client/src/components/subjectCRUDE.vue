@@ -8,7 +8,7 @@
       {{this.errorMessage}}
     </v-alert>
     <v-toolbar flat color="white">
-      <v-toolbar-title primary>Homework Table</v-toolbar-title>
+      <v-toolbar-title primary>Subject Table</v-toolbar-title>
       <v-divider
         class="mx-2"
         inset
@@ -29,22 +29,19 @@
             <v-container grid-list-md>
               <v-layout wrap>
                 <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.WorkID" label="Work ID"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
                   <v-text-field v-model="editedItem.SubjectID" label="Subject ID"></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm6 md4>
                   <v-text-field v-model="editedItem.Name" label="Name"></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.Full_Score" label="Full Score"></v-text-field>
+                  <v-text-field v-model="editedItem.Category" label="Category"></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm6 md4>
+                  <v-text-field v-model="editedItem.Credit" label="Credit"></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm6 md4>
                   <v-text-field v-model="editedItem.Description" label="Description"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.Type" label="Type"></v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -69,22 +66,19 @@
             <v-container grid-list-md>
               <v-layout wrap>
                 <v-flex xs12 sm6 md4>
-                  <v-text-field disabled v-model="editedItem.WorkID" label="Work ID"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.SubjectID" label="Subject ID"></v-text-field>
+                  <v-text-field disabled v-model="editedItem.SubjectID" label="Subject ID"></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm6 md4>
                   <v-text-field v-model="editedItem.Name" label="Name"></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.Full_Score" label="Full Score"></v-text-field>
+                  <v-text-field v-model="editedItem.Category" label="Category"></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm6 md4>
+                  <v-text-field v-model="editedItem.Credit" label="Description"></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm6 md4>
                   <v-text-field v-model="editedItem.Description" label="Description"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.Type" label="Type"></v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -101,16 +95,15 @@
     </v-toolbar>
     <v-data-table
       :headers="headers"
-      :items="homeworks"
+      :items="subjects"
       class="elevation-1"
     >
       <template slot="items" slot-scope="props">
-        <td>{{ props.item.WorkID }}</td>
-        <td class="text-xs-right">{{ props.item.SubjectID }}</td>
+        <td>{{ props.item.SubjectID }}</td>
         <td class="text-xs-right">{{ props.item.Name }}</td>
-        <td class="text-xs-right">{{ props.item.Full_Score }}</td>
+        <td class="text-xs-right">{{ props.item.Category }}</td>
+        <td class="text-xs-right">{{ props.item.Credit }}</td>
         <td class="text-xs-right">{{ props.item.Description }}</td>
-        <td class="text-xs-right">{{ props.item.Type }}</td>
         <td class="justify-center layout px-0">
           <v-icon
             small
@@ -136,7 +129,7 @@
 
 
 <script>
-import HomeworkService from '@/services/HomeworkService.js'
+import SubjectService from '@/services/SubjectService.js'
 
   export default {
     data: () => ({
@@ -146,35 +139,32 @@ import HomeworkService from '@/services/HomeworkService.js'
       errorMessage: '',
       headers: [
         {
-          text: 'Work ID',
+          text: 'Subject ID',
           align: 'left',
           sortable: true,
-          value: 'WorkID'
+          value: 'SubjectID'
         },
-        { text: 'Subject ID', align: 'right',value: 'SubjectID' },
-        { text: 'Name', align: 'right', value: 'Name' },
-        { text: 'Full Score', align: 'right', value: 'Full_Score' },
+        { text: 'Name', align: 'right',value: 'Name' },
+        { text: 'Category', align: 'right', value: 'Category' },
+        { text: 'Credit', align: 'right', value: 'Credit' },
         { text: 'Description', align: 'right', value: 'Description' },
-        { text: 'Type', align: 'right', value: 'Type' },
         { text: 'Actions', align: 'center', value: 'actions', sortable: false }
       ],
-      desserts: [],homeworks: [],
+      desserts: [],subjects: [],
       editedIndex: -1,
       editedItem: {
-        'WorkID': '',
         'SubjectID': '',
         'Name' : '',
-        'Full_Score': '',
-        'Description': '',
-        'Type': ''
+        'Category': '',
+        'Credit': '',
+        'Description': ''
       },
       defaultItem: {
-        'WorkID': '',
         'SubjectID': '',
         'Name' : '',
-        'Full_Score': '',
-        'Description': '',
-        'Type': ''
+        'Category': '',
+        'Credit': '',
+        'Description': ''
       }
     }),
 
@@ -200,40 +190,38 @@ import HomeworkService from '@/services/HomeworkService.js'
 
     methods: {
       initialize () {
-        this.homeworks = [
+        this.subjects = [
           {
-            'WorkID': 'A',
-            'SubjectID': 'A',
-            'Name' : 'A',
-            'Full_Score': 'A',
-            'Description': 'A',
-            'Type': 'A'
+          'SubjectID': 'S',
+          'Name' : 'S',
+          'Category': 'S',
+          'Credit': 'S',
+          'Description': 'S'
           },
           {
-            'WorkID': 'B',
-            'SubjectID': 'B',
-            'Name' : 'B',
-            'Full_Score': 'B',
-            'Description': 'B',
-            'Type': 'B'
+          'SubjectID': 'W',
+          'Name' : 'W',
+          'Category': 'W',
+          'Credit': 'W',
+          'Description': 'W'
           }
         ]
       },
       //Open edit popup
       editItem (item) {
-        this.editedIndex = this.homeworks.indexOf(item)
+        this.editedIndex = this.subjects.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialogU = true
       },
       //delete
       deleteItem (item) {
-        HomeworkService.deleteHomework(item.WorkID).then((res) => {
+        SubjectService.deleteSubject(item.SubjectID).then((res) => {
           if(res.data == 'Error') {
             //do something to handle error
             this.error = true
           } else {
-            const index = this.homeworks.indexOf(item)
-            this.homeworks.splice(index, 1)
+            const index = this.subjects.indexOf(item)
+            this.subjects.splice(index, 1)
           }
 
         })
@@ -255,66 +243,57 @@ import HomeworkService from '@/services/HomeworkService.js'
       },
       //insert
       async saveI () {
-        let homework = {        
-            WorkID: this.editedItem.WorkID,
+        let subject = {        
             SubjectID: this.editedItem.SubjectID,
             Name: this.editedItem.Name,
-            Full_Score: this.editedItem.Full_Score,
-            Description: this.editedItem.Description,
-            Type: this.editedItem.Type
+            Category: this.editedItem.Category,
+            Credit: this.editedItem.Credit,
+            Description: this.editedItem.Description
         }
-        HomeworkService.insertHomework(homework).then(res => {
+        SubjectService.insertSubject(subject).then(res => {
         if(res.data == 'Error') {
           //do something to handle error
-            this.errorMessage = 'Error trying to insert homework info.'
+            this.errorMessage = 'Error trying to insert subject info.'
             this.alert = true
         } else {
           if (this.editedIndex > -1) {
-            Object.assign(this.homeworks[this.editedIndex], this.editedItem)
+            Object.assign(this.subjects[this.editedIndex], this.editedItem)
           } else {
-            this.homeworks.push(this.editedItem)
+            this.subjects.push(this.editedItem)
           }
         }
         })
+        
         this.closeI()
         
       },
       //update
       saveU () {
-        let homework = {        
-            WorkID: this.editedItem.WorkID,
+        let subject = {        
             SubjectID: this.editedItem.SubjectID,
             Name: this.editedItem.Name,
-            Full_Score: this.editedItem.Full_Score,
-            Description: this.editedItem.Description,
-            Type: this.editedItem.Type
+            Category: this.editedItem.Category,
+            Credit: this.editedItem.Credit,
+            Description: this.editedItem.Description
         }
-
-        HomeworkService.updateHomework(homework.StudentID, homework).then(res => {
+        SubjectService.updateSubject(subject.SubjectID, subject).then(res => {
         if(res.data == 'Error') {
           //do something to handle error
-            this.errorMessage = 'Error trying to update homework info.'
+            this.errorMessage = 'Error trying to update subject info.'
             this.alert = true
         } else {
           if (this.editedIndex > -1) {
-            Object.assign(this.homeworks[this.editedIndex], this.editedItem)
+            Object.assign(this.subjects[this.editedIndex], this.editedItem)
           } else {
-            this.homeworks.push(this.editedItem)
+            this.subjects.push(this.editedItem)
           }
         }
         })
-        
-
-        if (this.editedIndex > -1) {
-          Object.assign(this.homeworks[this.editedIndex], this.editedItem)
-        } else {
-          this.homeworks.push(this.editedItem)
-        }
         this.closeU()
       },
       async getData () {
-        var x = await HomeworkService.index()
-        this.homeworks = x.data 
+        var x = await SubjectService.index()
+        this.subjects = x.data 
       }
     }
 

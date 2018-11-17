@@ -10,13 +10,13 @@
 
     <v-form v-model="valid" class="inputform">
         <v-text-field
-        v-model="ClassInput"
-        label="Class"
+        v-model="subjectInput"
+        label="Subject ID"
         required
         ></v-text-field>
         <v-text-field
-        v-model="DateInput"
-        label="Date"
+        v-model="yearInput"
+        label="Year"
         required
         ></v-text-field>
         <div>
@@ -25,7 +25,7 @@
     </v-form>
 
     <v-toolbar flat color="white">
-      <v-toolbar-title primary>Absent Student Table</v-toolbar-title>
+      <v-toolbar-title primary>Teacher Student</v-toolbar-title>
       <v-divider
         class="mx-2"
         inset
@@ -41,8 +41,8 @@
     >
       <template slot="items" slot-scope="props">
         <td>{{ props.item.Name }}</td>
-        <td class="text-xs-right">{{ props.item.Class }}</td>
-        <td class="text-xs-right">{{ props.item.Type }}</td>
+        <td class="text-xs-right">{{ props.item.StudentID }}</td>
+        <td class="text-xs-right">{{ props.item.Grade}}</td>
       </template>
       <template slot="no-data">
         <h1>Nothing Match your query</h1>
@@ -61,24 +61,27 @@ import QueryService from '@/services/QueryService.js'
       errorMessage: '',
       headers: [
         {
-          text: 'Student name',
+          text: 'Student Name',
           align: 'left',
           sortable: true,
           value: 'Name'
         },
-        { text: 'Class', align: 'right',value: 'Class' },
-        { text: 'Type', align: 'right', value: 'Type' },
+        { text: 'Student ID', align: 'right',value: 'StudentID' },
+        { text: 'Grade', align: 'right', value: 'Grade' }
       ],
       parents: [],
       editedIndex: -1,
       defaultItem: {
-        'Name' : '',
-        'Class': '',
-        'Type': ''
+        'Name': '',
+        'StudentID' : '',
+        'Grade': ''
       },
       ClassInput: '',
       DateInput: '',
-      valid: true
+      valid: true,
+      TeacherNameInput: '',
+      subjectInput: '',
+      yearInput: ''
     }),
 
     computed: {
@@ -101,22 +104,21 @@ import QueryService from '@/services/QueryService.js'
       initialize () {
         this.parents = [
           {
-            'Name' : 'X',
-            'Class': 'Y',
-            'Type': 'Z'
+            'Name': 'Y',
+            'StudentID' : '05',
+            'Grade': '4.00'
           },
           {
-            'Name' : 'K',
-            'Class': 'A',
-            'Type': 'B'
+            'Name': 'Q',
+            'StudentID' : '06',
+            'Grade': '9.0'
           }
         ]
       },
       async getData () {
-        let classID = this.ClassInput
-        let day = this.DateInput
-        console.log(classID,day)
-        var x = await QueryService.absentStudent(classID,day)
+        let sI = this.subjectInput
+        let y = this.yearInput
+        var x = await QueryService.courseGrade(sI,y)
         this.parents = x.data 
       }
     }

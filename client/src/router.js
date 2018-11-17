@@ -14,9 +14,11 @@ import studentCRUDE from '@/components/studentCRUDE'
 import announcementCRUDE from '@/components/announcementCRUDE'
 import homeworkCRUDE from '@/components/homeworkCRUDE'
 import attendanceCRUDE from '@/components/attendanceCRUDE'
-import scheduleCRUDE from '@/components/scheduleCRUDE'
+import subjectCRUDE from '@/components/subjectCRUDE'
 import StudentWork from '@/components/StudentWork'
 import AbsentStudent from '@/components/AbsentStudent'
+import TeacherStudent from '@/components/TeacherStudent'
+import CourseGrade from '@/components/CourseGrade'
 
 Vue.use(Router)
 
@@ -96,9 +98,9 @@ export default new Router({
       component: attendanceCRUDE
     },
     {
-      path: '/schedule-crude',
-      name: 'schedule-crude',
-      component: scheduleCRUDE
+      path: '/subject-crude',
+      name: 'subject-crude',
+      component: subjectCRUDE
     },
     {
       path: '/student-work',
@@ -118,12 +120,12 @@ export default new Router({
     {
       path: '/teacher-student',
       name: 'teacher-student',
-      component: StudentWork
+      component: TeacherStudent
     },
     {
       path: '/course-grade',
       name: 'course-grade',
-      component: StudentWork
+      component: CourseGrade
     },
     {
       path: '*',
