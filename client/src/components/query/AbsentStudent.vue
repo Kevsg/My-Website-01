@@ -128,8 +128,4 @@ import QueryService from '@/services/QueryService.js'
 .inputform {
     padding: 50px 100px;
 }
-
-.b {
-    margin-left:80vw;
-}
 </style>

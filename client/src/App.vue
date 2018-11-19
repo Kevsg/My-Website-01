@@ -1,69 +1,75 @@
 <template>
 <v-app class="APP">
-  <router-view></router-view>
+  <div class="dgrid">
+    <div class="sidebar yellow lighten-1">
+      <ul>
+        <li>ข่าวสาร</li>
+        <router-link :to="{ name: 'teacher-assignment'}"><li>การบ้าน</li></router-link>
+        <li>ตารางเรียน/ตารางสอบ</li>
+        <li>ข้อมูลนักเรียน</li>       
+        <li>ติดต่อครูประจำชั้น</li> 
+      </ul>
+          
+    </div>
+      <div class="content">
+        <router-view></router-view>
+     </div>
+  </div>
 </v-app>
 </template>
 
 <script>
-import HomePage from '@/components/HomePage'
-import About from '@/components/About'
-import Contact from '@/components/Contact'
-import AnimationPage from '@/components/AnimationPage'
 
 export default {
   name: 'App',
-  components: {
-    HomePage,
-    About,
-    Contact,
-    AnimationPage
-  }
+  data () {
+      return {
+        drawer: true,
+        items: [
+          { title: 'Home', icon: 'dashboard' },
+          { title: 'About', icon: 'question_answer' }
+        ]
+      }
+    }
 }
 </script>
 
-<style scoped>
+<style>
+@import url('https://fonts.googleapis.com/css?family=Kanit|Trirong');
+
+@font-face {
+  font-family: ChulaCharasNewReg;
+  src: url(/assets/CHULALONGKORNReg.otf) format('otf')
+}
+
+a {
+  text-decoration: none;
+  color: #424242;
+}
+
+li {
+  font-size: 1.5em;
+  list-style-type: none;
+  padding-top: 20px;
+  padding-right:5px;
+  padding-bottom:20px;
+  font-family: 'Kanit', sans-serif;
+  color: #424242;
+}
+
+li:hover {
+  background-color: #FFF59D;
+}
+.dgrid {
+  display: grid;
+  grid-template-columns: 15% 85%;
+  grid-template-rows: 100vh;
+  font-family: 'ChulaCharasNewReg';
+
+}
+.sidebar {
+  display: flex;
+  flex-direction: column;
+}
 
 </style>
-
-
-<!--
-
-<template>
-  <v-app>
-    <v-toolbar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        flat
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
-    </v-toolbar>
-
-    <v-content>
-      <HelloWorld/>
-    </v-content>
-  </v-app>
-</template>
-
-<script>
-import HelloWorld from './components/HelloWorld'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  },
-  data () {
-    return {
-      //
-    }
-  }
-}
-</script>
-

@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import image from '../assets/colordesign.png'
+import image from '../../assets/colordesign.png'
 
 export default {
   name: 'appgrid',

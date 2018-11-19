@@ -19,6 +19,7 @@
      
 
       <v-dialog v-model="dialogI" max-width="500px">
+        
         <v-btn slot="activator" color="primary" dark class="mb-2">New Item</v-btn>
         <v-card>
           <v-card-title>

@@ -19,12 +19,16 @@
   <router-link to='/course-grade'><v-btn class="ml-5 noButtonColor">Get Student Grade in Course</v-btn></router-link>
   </div>
 
+  <div class="button-container">
+  <router-link to='/teacher-assignment'><v-btn class="ml-5 noButtonColor dark">Teacher's Assignment</v-btn></router-link>
+  </div>
+
   
 </div>
 </template>
 
 <script>
-import AnimationShowcase from '@/components/AnimationShowcase'
+import AnimationShowcase from '@/components/test/AnimationShowcase'
 
 export default {
   name: 'HomePage',

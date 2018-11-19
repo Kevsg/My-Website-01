@@ -1,24 +1,28 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HomePage from '@/components/HomePage'
-import FirstRoute from '@/components/FirstRoute'
-import FirstRouteChild from '@/components/FirstRouteChild'
-import AnimationShowcase from '@/components/AnimationShowcase'
-import About from '@/components/About'
-import Contact from '@/components/Contact'
-import Insert from '@/components/Insert'
-import Delete from '@/components/Delete'
-import Update from '@/components/Update'
-import parentCRUDE from '@/components/parentCRUDE'
-import studentCRUDE from '@/components/studentCRUDE'
-import announcementCRUDE from '@/components/announcementCRUDE'
-import homeworkCRUDE from '@/components/homeworkCRUDE'
-import attendanceCRUDE from '@/components/attendanceCRUDE'
-import subjectCRUDE from '@/components/subjectCRUDE'
-import StudentWork from '@/components/StudentWork'
-import AbsentStudent from '@/components/AbsentStudent'
-import TeacherStudent from '@/components/TeacherStudent'
-import CourseGrade from '@/components/CourseGrade'
+import FirstRoute from '@/components/test/FirstRoute'
+import FirstRouteChild from '@/components/test/FirstRouteChild'
+import AnimationShowcase from '@/components/test/AnimationShowcase'
+import About from '@/components/test/About'
+import Contact from '@/components/test/Contact'
+import Insert from '@/components/test/Insert'
+import Delete from '@/components/test/Delete'
+import Update from '@/components/test/Update'
+import parentCRUDE from '@/components/crude/parentCRUDE'
+import studentCRUDE from '@/components/crude/studentCRUDE'
+import announcementCRUDE from '@/components/crude/announcementCRUDE'
+import homeworkCRUDE from '@/components/crude/homeworkCRUDE'
+import attendanceCRUDE from '@/components/crude/attendanceCRUDE'
+import subjectCRUDE from '@/components/crude/subjectCRUDE'
+import StudentWork from '@/components/query/StudentWork'
+import AbsentStudent from '@/components/query/AbsentStudent'
+import TeacherStudent from '@/components/query/TeacherStudent'
+import CourseGrade from '@/components/query/CourseGrade'
+import GetTeacherID from '@/components/GetTeacherID'
+import TeacherAssignmentID from '@/components/TeacherAssignmentID'
+
+import NewAssignmentPage from '@/components/NewAssignmentPage'
 
 Vue.use(Router)
 
@@ -128,8 +132,19 @@ export default new Router({
       component: CourseGrade
     },
     {
-      path: '*',
-      redirect: '/home'
+      path: '/teacher-assignment',
+      name: 'teacher-assignment',
+      component: GetTeacherID
+    },
+    {
+      path: '/teacher-assignment/:id',
+      name: 'teacher-assignment-id',
+      component: TeacherAssignmentID
+    },
+    {
+      path: '/teacher-assignment/:id/create',
+      name: 'teacher-assignment-id-create',
+      component: NewAssignmentPage
     }
   ]
 })

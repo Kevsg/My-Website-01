@@ -1,6 +1,6 @@
 // NOT FINISH HAVE TO FIND WAYS TO HANDLE DATE
 
-const connection = require('../db.js')
+const connection = require('../../db.js')
 
 module.exports = {
   async index (req, res) {

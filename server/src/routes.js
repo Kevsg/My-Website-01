@@ -1,12 +1,11 @@
-const ParentController = require('./controllers/ParentController')
-
-const StudentController = require('./controllers/StudentController')
-const AnnouncementController = require('./controllers/AnnouncementController')
-const HomeworkController = require('./controllers/HomeworkController')
-const AttendanceController = require('./controllers/AttendanceController')
-const SubjectController = require('./controllers/SubjectController')
-
+const ParentController = require('./controllers/crude/ParentController')
+const StudentController = require('./controllers/crude/StudentController')
+const AnnouncementController = require('./controllers/crude/AnnouncementController')
+const HomeworkController = require('./controllers/crude/HomeworkController')
+const AttendanceController = require('./controllers/crude/AttendanceController')
+const SubjectController = require('./controllers/crude/SubjectController')
 const QueryController = require('./controllers/QueryController')
+const TeacherController = require('./controllers/functional/TeacherController')
 
 module.exports = (app) => {
   // Parent Route
@@ -29,7 +28,6 @@ module.exports = (app) => {
   app.post('/homework/insert', HomeworkController.insert)
   app.put('/homework/update/:id', HomeworkController.update)
   app.delete('/homework/delete/:id', HomeworkController.delete)
-
   // Attendance Route
   app.get('/attendance/index', AttendanceController.index)
   app.post('/attendance/insert', AttendanceController.insert)
@@ -46,4 +44,11 @@ module.exports = (app) => {
   app.get('/school-activity', QueryController.schoolActivity)
   app.get('/teacher-student/:teacherName', QueryController.teacherStudent)
   app.get('/course-grade/:sID&:year', QueryController.courseGrade)
+  // Teacher Route
+  app.get('/teacher-assignment/:tid', TeacherController.findAssignments)
+  app.get('/teacher-assignment/:tid/subjects', TeacherController.getTeachingSubjects)
+  app.get('/teacher-assignment/:tid/classes', TeacherController.getTeachingClasses)
+  app.post('/teacher-assignment/:tid/insert', TeacherController.createAssignment)
+  app.put('/teacher-assignment/:tid/edit/:aid', TeacherController.editAssignment)
+  app.delete('/teaacher-assignment/:tid/delete/:aid', TeacherController.deleteAssignment)
 }
