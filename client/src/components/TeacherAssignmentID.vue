@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg">
 
     <div v-if="showIndexPage">
      <v-alert
@@ -11,16 +11,14 @@
     </v-alert>
 
     <v-toolbar flat color="white" class="px-3 my-1">
-      <v-toolbar-title class="tableTitle">การบ้าน
-        
-        <v-btn slot="activator" class="my-5 mx-3" color="yellow darken-3" dark @click="gotoInsert">+ เพิ่ม</v-btn>
-        
-        <div class="filter">
+      <v-toolbar-title class="tableTitle display-1 d-flex-inline" > <div class="t">การบ้าน</div>
+        <v-btn slot="activator" class="my-5 mx-3" color="yellow darken-3" dark @click="gotoInsert">+  เพิ่ม</v-btn>
+        <div class="filter d-inline-flex">
           <v-select
             :items="subjectSelection.items"
             label="วิชาที่สอนทั้งหมด"
             solo
-            class="filter1 mx-3"
+            class="filter1 mx-3 "
             v-model="subjectSelect"
           ></v-select>
           <v-select
@@ -31,10 +29,7 @@
             v-model="classSelect"
           ></v-select>
         </div>
-        </v-toolbar-title>
-      
-      
-     
+      </v-toolbar-title>
 
       <v-dialog v-model="dialogI" max-width="500px">
          <v-card>
@@ -69,6 +64,7 @@
             <v-btn color="blue darken-1" flat @click.native="closeI">Cancel</v-btn>
             <v-btn color="blue darken-1" flat @click.native="saveI">Save</v-btn>
           </v-card-actions>
+
         </v-card>
       </v-dialog>
       
@@ -117,7 +113,7 @@
       :items="assignments"
       class="elevation-1 my-4 mx-5"
     >
-      <template slot="items" slot-scope="props" @click="changeToEditPage">
+      <template slot="items" slot-scope="props">
         <td >{{ props.item.WorkID }}</td>
         <td class="text-xs-center">{{ props.item.Subject_Name }}</td>
         <td class="text-xs-center">{{ props.item.ClassID }}</td>
@@ -146,76 +142,143 @@
     </v-data-table>
     </div>
     
+  <!-- Edit Page !-->  
     
-  <div v-if="showEditPage">  
+  <div class="bg2" v-if="showEditPage">
 
     <h1 class="my-3 mx-5">การบ้าน</h1>
+
+    <div class="abc">
+      <v-btn class="b1" color="yellow darken-1" depressed @click="changeToEditPage">ข้อมูลการบ้าน</v-btn>
+      <v-btn class="b2" color="yellow lighten-4" depressed @click="changeToCheckPage">ตรวจการบ้าน</v-btn>
+    </div>
+
+    <div class="mb-2">
 
     <h2 class="d-inline ml-5 mr-3">วิชา</h2>
     <v-select
         :items="subjectSelection.items"
-        label="Select subjects"
+        label="วิชาที่สอน"
         v-model=subjectSelect
         class="d-inline-block mr-5"
         solo
     ></v-select>
 
+
     <h2 class="d-inline ml-5 mr-3">ห้อง</h2>
         <v-select
         :items="classSelection.items"
-        label="Select Class"
+        label="ห้องที่สอน"
         class="d-inline-block"
         v-model=classSelect
         solo
     ></v-select>
 
+    </div>
+
 
     <v-form>
 
-        <h2 class="d-inline ml-5 mr-3">หัวข้อ</h2>
+        <div class="pr-5 mb-4 x">
+        <h2 class="d-inline ml-5 mr-3 mt-1">หัวข้อ</h2>
         
         <v-text-field 
         label="หัวข้อ"
-        solo full-width
-        v-model=nameInput
-        class="d-inline-block h"
+        solo
+        v-model=EditednameInput
+        class="d-inline-block"
         ></v-text-field>
 
-         <h2 class="ml-5 mr-3 mb-3">รายละเอียด</h2>
+        </div>
+
+        <div class="x mb-4">
+        <h2 class="ml-5 d-inline mt-1">รายละเอียด</h2>
 
         <v-textarea
           solo
           label="รายละเอียด"
-          v-model="descriptionInput"
-          class="mx-5"
+          full-width
+          v-model="EditeddescriptionInput"
+          class="mx-5 d-inline-flex"
         ></v-textarea>
+        </div>
 
 
-        <h2 class="d-inline mx-5"> กำหนดส่ง</h2>
-        <v-text-field class="d-inline-block"
-        label="YYYY/MM/YY "
+        <div class="f2 mx-5">
+        <h2 class="d-inline mr-5 mt-1"> กำหนดส่ง</h2>
+        <v-text-field class="d-inline-block m-1"
+        label="YYYY/MM/DD "
         solo
-        v-model="dateInput"
+        v-model="EditeddateInput"
         ></v-text-field>
 
-        <h2 class="d-inline mx-5">คะแนนเต็ม</h2>
+        <h2 class="d-inline mx-5 mt-1">คะแนนเต็ม</h2>
         <v-text-field
         label="คะแนนเต็ม"
         solo
         class="d-inline-block"
-        v-model="fullscoreInput"
+        v-model="EditedfullscoreInput"
         ></v-text-field>
-        <div class="d-block mx-5">
-        <v-btn class="yellow darken-3" @click="createAssignment" dark>ยืนยัน</v-btn>
+        </div>
+
+        <div class="d-block mx-5" >
+        <v-btn class="yellow darken-3" @click="editAssignment" dark>ยืนยัน</v-btn>
         
         <v-btn class="yellow darken-3" @click="goBack" dark>ยกเลิก</v-btn>
         </div>
 
     </v-form>
 
+    </div>
 
+    
+    <!-- Check Page !-->
 
-</div>
+    <div class="check" v-if="showCheckPage">
+      <h1 class="my-3 mx-5">การบ้าน</h1>
+
+      <div class="edit">
+        <div class="abc">
+        <v-btn class="b1" color="yellow lighten-4" depressed @click="changeToEditPage">ข้อมูลการบ้าน</v-btn>
+        <v-btn class="b2" color="yellow darken-1" depressed @click="changeToCheckPage">ตรวจการบ้าน</v-btn>
+        </div>
+
+         <v-data-table
+            :headers="headers"
+            :items="assignments"
+            class="elevation-1  my-1 mx-5 d-inline"
+          >
+            <template slot="items" slot-scope="props" @click="changeToEditPage">
+              <td >{{ props.item.WorkID }}</td>
+              <td class="text-xs-center">{{ props.item.Subject_Name }}</td>
+              <td class="text-xs-center">{{ props.item.ClassID }}</td>
+              <td class="text-xs-left">{{ props.item.Name }}</td>
+              <td class="text-xs-center">{{ props.item.checked }}</td>
+              <td class="justify-center layout px-0">
+                <v-icon
+                  small
+                  class="mr-2"
+                  @click="changeToEditPage(props.item)"
+                >
+                  edit
+                </v-icon>
+                <v-icon
+                  small
+                  @click="deleteItem(props.item)"
+                >
+                  delete
+                </v-icon>
+              </td>
+            </template>
+      
+            <template slot="no-data">
+              <h1>No Results</h1>
+            </template>
+          </v-data-table>
+      </div>
+    </div>
+
+    
 
   </div>
 </template>
@@ -268,7 +331,18 @@ import TeacherService from '@/services/TeacherService.js'
       showEditPage: false,
       showCheckPage: false,
       classSelect: '',
-      subjectSelect: ''
+      subjectSelect: '',
+      nameInput: '',
+      descriptionInput: '',
+      dateInput: '',
+      fullscoreInput: '',
+      // For editing page
+      EditedclassSelect:'',
+      EditedsubjectSelect:'',
+      EditednameInput: '',
+      EditeddescriptionInput: '',
+      EditeddateInput: '',
+      EditedfullscoreInput: ''
 
     }),
 
@@ -418,7 +492,11 @@ import TeacherService from '@/services/TeacherService.js'
         let Tid = this.$route.params.id
         this.$router.push({ path: `/teacher-assignment/${Tid}/create` })
       },
-      changeToEditPage(x) {
+      changeToEditPage(work) {
+          console.log(work)
+          this.EditedclassSelect = work.ClassID
+          this.EditedsubjectSelect = work.Subject_Name
+          this.EditednameInput = work.Name
           this.showIndexPage = false
           this.showCheckPage = false
           this.showEditPage = true
@@ -427,6 +505,19 @@ import TeacherService from '@/services/TeacherService.js'
           this.showIndexPage = true
           this.showCheckPage = false
           this.showEditPage = false
+      },
+      changeToCheckPage() {
+          console.log('Change')
+          this.showIndexPage = false
+          this.showCheckPage = true
+          this.showEditPage = false
+      },
+      editAssignment() {
+        console.log('Edited Assignment')
+        let x = {
+          name: this.EditednameInput
+        }
+        console.log(x)
       }
     }
 
@@ -434,6 +525,18 @@ import TeacherService from '@/services/TeacherService.js'
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css?family=Kanit|Trirong');
+
+.ab {
+  display: flex;
+  justify-content: center;
+}
+
+.abc {
+  display: flex;
+  justify-content: center;
+  height: auto;
+}
 
 .filter {
   display: inline-flex;
@@ -448,6 +551,47 @@ import TeacherService from '@/services/TeacherService.js'
 .filter2 {
   display: inline-block !important;
   margin-right:5px;
+}
+
+.b1{
+  margin-bottom:5vh;
+  margin-right:0px;
+  font-size: 1em;
+  width:10vw;
+}
+
+.b2{
+  margin-bottom:5vh;
+  margin-left:0px;
+  width:10vw;
+}
+
+.bg {
+  background-color: white;
+  padding: 1.5em;
+  margin: 30px;
+}
+
+.t {
+  font-family: 'Kanit', sans-serif !important;
+  display: inline;
+  font-size: 1em;
+}
+
+.bg2{
+  background-color: white;
+  color: #424242;
+  font-family: 'Kanit', sans-serif;
+}
+
+.x {
+    display: flex;
+}
+
+.f2 {
+    display: flex;
+    justify-content: space-around;
+    padding-top:5px;
 }
 
 </style>

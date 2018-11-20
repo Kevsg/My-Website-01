@@ -1,8 +1,9 @@
 <template>
 <div>
-
+    <div class="bg2">
     <h1 class="my-3 mx-5">การบ้าน</h1>
 
+    <div class="mb-2">
     <h2 class="d-inline ml-5 mr-3">วิชา</h2>
     <v-select
         :items="subjectSelection.items"
@@ -11,6 +12,7 @@
         class="d-inline-block mr-5"
         solo
     ></v-select>
+
 
     <h2 class="d-inline ml-5 mr-3">ห้อง</h2>
         <v-select
@@ -21,43 +23,54 @@
         solo
     ></v-select>
 
+    </div>
+
 
     <v-form>
 
-        <h2 class="d-inline ml-5 mr-3">หัวข้อ</h2>
+        <div class="pr-5 mb-4 x">
+        <h2 class="d-inline ml-5 mr-3 mt-1">หัวข้อ</h2>
         
         <v-text-field 
         label="หัวข้อ"
-        solo full-width
+        solo
         v-model=nameInput
-        class="d-inline-block h"
+        class="d-inline-block"
         ></v-text-field>
 
-         <h2 class="ml-5 mr-3 mb-3">รายละเอียด</h2>
+        </div>
+
+        <div class="x mb-4">
+        <h2 class="ml-5 d-inline mt-1">รายละเอียด</h2>
 
         <v-textarea
           solo
           label="รายละเอียด"
+          full-width
           v-model="descriptionInput"
-          class="mx-5"
+          class="mx-5 d-inline-flex"
         ></v-textarea>
+        </div>
 
 
-        <h2 class="d-inline mx-5"> กำหนดส่ง</h2>
-        <v-text-field class="d-inline-block"
+        <div class="f2 mx-5">
+        <h2 class="d-inline mr-5 mt-1"> กำหนดส่ง</h2>
+        <v-text-field class="d-inline-block m-1"
         label="YYYY/MM/DD "
         solo
         v-model="dateInput"
         ></v-text-field>
 
-        <h2 class="d-inline mx-5">คะแนนเต็ม</h2>
+        <h2 class="d-inline mx-5 mt-1">คะแนนเต็ม</h2>
         <v-text-field
         label="คะแนนเต็ม"
         solo
         class="d-inline-block"
         v-model="fullscoreInput"
         ></v-text-field>
-        <div class="d-block mx-5">
+        </div>
+
+        <div class="d-block mx-5" >
         <v-btn class="yellow darken-3" @click="createAssignment" dark>ยืนยัน</v-btn>
         
         <v-btn class="yellow darken-3" @click="goBack" dark>ยกเลิก</v-btn>
@@ -65,7 +78,7 @@
 
     </v-form>
 
-
+    </div>
 
 </div>
 </template>
@@ -148,4 +161,25 @@ import TeacherService from '@/services/TeacherService.js'
     }
   }
 </script>
+
+<style scoped>
+.bg2{
+  background-color: white;
+  padding: 1.5em;
+  margin: 30px;
+  color: #424242;
+  font-family: 'Kanit', sans-serif;
+}
+
+.x {
+    display: flex;
+}
+
+.f2 {
+    display: flex;
+    justify-content: space-around;
+    padding-top:5px;
+}
+</style>
+
 

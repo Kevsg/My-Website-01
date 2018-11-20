@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="bg">
         <v-form v-model="valid" class="inputform">
             <v-text-field
             v-model="TeacherIDInput"
@@ -32,5 +32,9 @@ export default {
 </script>
 
 <style scoped>
+.bg {
+    background-color: white;
+    margin: 30px;
+}
 </style>
 

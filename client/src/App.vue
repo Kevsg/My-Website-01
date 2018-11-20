@@ -1,7 +1,7 @@
 <template>
 <v-app class="APP">
   <div class="dgrid">
-    <div class="sidebar yellow lighten-1">
+    <div class="sidebar">
       <ul>
         <li>ข่าวสาร</li>
         <router-link :to="{ name: 'teacher-assignment'}"><li>การบ้าน</li></router-link>
@@ -42,6 +42,10 @@ export default {
   src: url(/assets/CHULALONGKORNReg.otf) format('otf')
 }
 
+ul {
+  padding-left:0em;
+}
+
 a {
   text-decoration: none;
   color: #424242;
@@ -55,21 +59,23 @@ li {
   padding-bottom:20px;
   font-family: 'Kanit', sans-serif;
   color: #424242;
+  padding-left: 1em;
 }
 
 li:hover {
-  background-color: #FFF59D;
+  background-color: #FFE0B2;
 }
 .dgrid {
   display: grid;
   grid-template-columns: 15% 85%;
-  grid-template-rows: 100vh;
+  grid-template-rows: minmax(100vh, 100%);
   font-family: 'ChulaCharasNewReg';
-
+  background-color:#FFFBE8;
 }
 .sidebar {
   display: flex;
   flex-direction: column;
+  background-color: #FFCC73;
 }
 
 </style>
