@@ -118,7 +118,6 @@
         <td class="text-xs-center">{{ props.item.Subject_Name }}</td>
         <td class="text-xs-center">{{ props.item.ClassID }}</td>
         <td class="text-xs-left">{{ props.item.Name }}</td>
-        <td class="text-xs-center">{{ props.item.checked }}</td>
         <td class="justify-center layout px-0">
           <v-icon
             small
@@ -159,7 +158,7 @@
     <v-select
         :items="subjectSelection.items"
         label="วิชาที่สอน"
-        v-model=subjectSelect
+        v-model="EditedsubjectSelect"
         class="d-inline-block mr-5"
         solo
     ></v-select>
@@ -170,7 +169,7 @@
         :items="classSelection.items"
         label="ห้องที่สอน"
         class="d-inline-block"
-        v-model=classSelect
+        v-model="EditedclassSelect"
         solo
     ></v-select>
 
@@ -185,7 +184,7 @@
         <v-text-field 
         label="หัวข้อ"
         solo
-        v-model=EditednameInput
+        v-model="EditednameInput"
         class="d-inline-block"
         ></v-text-field>
 
@@ -222,7 +221,7 @@
         </div>
 
         <div class="d-block mx-5" >
-        <v-btn class="yellow darken-3" @click="editAssignment" dark>ยืนยัน</v-btn>
+        <v-btn class="yellow darken-3" dark>ยืนยัน</v-btn>
         
         <v-btn class="yellow darken-3" @click="goBack" dark>ยกเลิก</v-btn>
         </div>
@@ -234,7 +233,7 @@
     
     <!-- Check Page !-->
 
-    <div class="check" v-if="showCheckPage">
+    <div class="check bg2" v-if="showCheckPage">
       <h1 class="my-3 mx-5">การบ้าน</h1>
 
       <div class="edit">
@@ -244,31 +243,16 @@
         </div>
 
          <v-data-table
-            :headers="headers"
-            :items="assignments"
+            :headers="checkTableHeaders"
+            :items="students"
             class="elevation-1  my-1 mx-5 d-inline"
           >
             <template slot="items" slot-scope="props" @click="changeToEditPage">
-              <td >{{ props.item.WorkID }}</td>
-              <td class="text-xs-center">{{ props.item.Subject_Name }}</td>
-              <td class="text-xs-center">{{ props.item.ClassID }}</td>
-              <td class="text-xs-left">{{ props.item.Name }}</td>
-              <td class="text-xs-center">{{ props.item.checked }}</td>
-              <td class="justify-center layout px-0">
-                <v-icon
-                  small
-                  class="mr-2"
-                  @click="changeToEditPage(props.item)"
-                >
-                  edit
-                </v-icon>
-                <v-icon
-                  small
-                  @click="deleteItem(props.item)"
-                >
-                  delete
-                </v-icon>
-              </td>
+              <td >{{ props.item.sid}}</td>
+              <td class="text-xs-center">{{ props.item.sname }}</td>
+              <td class="text-xs-center">{{ props.item.checkwork }}</td>
+              <td class="text-xs-center">{{ props.item.score }}</td>
+
             </template>
       
             <template slot="no-data">
@@ -303,11 +287,35 @@ import TeacherService from '@/services/TeacherService.js'
         { text: 'วิชา', align: 'center',value: 'Subject_Name' },
         { text: 'ห้อง', align: 'center', value: 'ClassID' },
         { text: 'หัวข้อ', align: 'center', value: 'Name' },
-        { text: 'ตรวจแล้ว', align: 'center', value: 'checked' },
         { text: 'Actions', align: 'center', value: 'actions', sortable: false }
+      ],
+      checkTableHeaders: [
+        {
+          text: 'เลขที่',
+          align: 'left',
+          sortable: true,
+          value: 'WorkID'
+        },
+        { text: 'ชื่อ', align: 'center',value: 'Subject_Name' },
+        { text: 'ตรวจแล้ว', align: 'center', value: 'ClassID' },
+        { text: 'คะแนน', align: 'center', value: 'Name' },
       ],
       originalAssignments: [],
       assignments: [],
+      students: [
+        {
+          sid: '1',
+          sname: 'Kevin',
+          checkwork: true,
+          score: '99'
+        },
+        {
+          sid: '2',
+          sname: 'Tae',
+          checkwork: false,
+          score: '-8' 
+        }
+      ],
       editedIndex: -1,
       editedItem: {
         'sjName': '',
@@ -336,7 +344,7 @@ import TeacherService from '@/services/TeacherService.js'
       descriptionInput: '',
       dateInput: '',
       fullscoreInput: '',
-      // For editing page
+
       EditedclassSelect:'',
       EditedsubjectSelect:'',
       EditednameInput: '',
@@ -365,10 +373,8 @@ import TeacherService from '@/services/TeacherService.js'
         val || this.close()
       },
       subjectSelect: function (val) {
-        //Change showing assignment to one with the corresponding subject name
         let result2 = this.originalAssignments.filter(assignment => assignment.Subject_Name == val);
         this.assignments = result2
-        // Change class dropdown to one with the subject Name
         let result3 = this.originalAssignments.filter(assignment => assignment.Subject_Name == val)
         let result4 = [...new Set(result3.map(assignment => assignment.ClassID))]
         this.classSelection.items = result4
@@ -377,6 +383,13 @@ import TeacherService from '@/services/TeacherService.js'
         //change assignment to corresponding class
         let result4 = this.originalAssignments.filter(assignment => assignment.ClassID == val && assignment.Subject_Name == this.subjectSelect)
         this.assignments = result4
+      },
+      EditedsubjectSelect: function (val) {
+        let result2 = this.originalAssignments.filter(assignment => assignment.Subject_Name == val);
+        this.assignments = result2
+        let result3 = this.originalAssignments.filter(assignment => assignment.Subject_Name == val)
+        let result4 = [...new Set(result3.map(assignment => assignment.ClassID))]
+        this.classSelection.items = result4
       }
     },
 
@@ -407,7 +420,8 @@ import TeacherService from '@/services/TeacherService.js'
       },
       //delete
       deleteItem (item) {
-        SubjectService.deleteSubject(item.SubjectID).then((res) => {
+        console.log('Delete', item.WorkID)
+        TeacherService.deleteAssignment(item.WorkID).then((res) => {
           if(res.data == 'Error') {
             //do something to handle error
             this.error = true
@@ -493,10 +507,12 @@ import TeacherService from '@/services/TeacherService.js'
         this.$router.push({ path: `/teacher-assignment/${Tid}/create` })
       },
       changeToEditPage(work) {
-          console.log(work)
-          this.EditedclassSelect = work.ClassID
           this.EditedsubjectSelect = work.Subject_Name
           this.EditednameInput = work.Name
+          this.EditedclassSelect = work.ClassID
+          this.EditeddescriptionInput = ''
+          this.EditeddateInput = ''
+          this.EditedfullscoreInput = ''
           this.showIndexPage = false
           this.showCheckPage = false
           this.showEditPage = true
@@ -507,17 +523,9 @@ import TeacherService from '@/services/TeacherService.js'
           this.showEditPage = false
       },
       changeToCheckPage() {
-          console.log('Change')
           this.showIndexPage = false
           this.showCheckPage = true
           this.showEditPage = false
-      },
-      editAssignment() {
-        console.log('Edited Assignment')
-        let x = {
-          name: this.EditednameInput
-        }
-        console.log(x)
       }
     }
 

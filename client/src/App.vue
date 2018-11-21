@@ -2,11 +2,16 @@
 <v-app class="APP">
   <div class="dgrid">
     <div class="sidebar">
+
+          <img src="../src/assets/owl.png" width="150px" class="logo">
+          <p>Smart School <br> Student Support System</p>
+
       <ul>
         <li>ข่าวสาร</li>
         <router-link :to="{ name: 'teacher-assignment'}"><li>การบ้าน</li></router-link>
         <li>ตารางเรียน/ตารางสอบ</li>
         <li>ข้อมูลนักเรียน</li>       
+        <router-link :to="{ name: 'teacher-attendance'}"><li>การเข้าเรียน</li></router-link>
         <li>ติดต่อครูประจำชั้น</li> 
       </ul>
           
@@ -42,8 +47,20 @@ export default {
   src: url(/assets/CHULALONGKORNReg.otf) format('otf')
 }
 
+p {
+  font-family: 'Kanit', sans-serif;
+  color: #424242;
+  font-size:1em;
+  text-align: center;
+}
+
 ul {
   padding-left:0em;
+}
+
+.logo {
+  margin:10px;
+  margin-left:30px;
 }
 
 a {
@@ -54,7 +71,7 @@ a {
 li {
   font-size: 1.5em;
   list-style-type: none;
-  padding-top: 20px;
+  padding-top: 12px;
   padding-right:5px;
   padding-bottom:20px;
   font-family: 'Kanit', sans-serif;

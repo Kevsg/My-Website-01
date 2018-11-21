@@ -4,7 +4,8 @@ var connection = mysql.createConnection({
   user: 'root',
   password: 'password',
   database: 's5project',
-  port: 4406
+  port: 4406,
+  multipleStatements: true
 })
 
 module.exports = connection

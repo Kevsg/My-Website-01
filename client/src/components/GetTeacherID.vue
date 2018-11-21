@@ -8,7 +8,7 @@
             ></v-text-field>
             <div>
                
-                <v-btn color="yellow darken-3" dark @click="findAssignment">Login</v-btn>
+                <v-btn color="yellow darken-3" dark @click="gotoNextPage">Login</v-btn>
 
             </div>
         </v-form>
@@ -23,10 +23,16 @@ export default {
       TeacherIDInput: ''
     }),
     methods: {
-        findAssignment() {
+        gotoNextPage() {
             let Tid = this.TeacherIDInput
-            this.$router.push({ path: `/teacher-assignment/${Tid}` })
-      }
+            if(this.$route.name == 'teacher-assignment') {
+                this.$router.push({ path: `/teacher-assignment/${Tid}` })
+            }
+            else if (this.$route.name == 'teacher-attendance'){
+                this.$router.push({ path: `/teacher-attendance/${Tid}` })
+            }
+
+        }
     }
 }
 </script>

@@ -5,10 +5,10 @@ export default {
     return Api().get(`teacher-assignment/${tid}`,tid)
   },
   createAssignment(tid, assignment) {
-    return Api().post(`teacher-assignment/${tid}/insert`, tid,assignment)
+    return Api().post(`teacher-assignment/${tid}/insert`, {tid, assignment})
   },
-  deleteAssigment (aid) {
-    return Api().delete(`subject/delete/${aid}`)
+  deleteAssignment (aid) {
+    return Api().delete(`teacher-assignment/delete/${aid}`,aid)
   },
   updateAssigment (aid, assignment) {
     return Api().put(`subject/update/${aid}`, assignment)
@@ -18,5 +18,8 @@ export default {
   },
   getTeachingClasses(tid) {
     return Api().get(`teacher-assignment/${tid}/classes`)
+  },
+  getClassYear(cid) {
+    return Api().get(`teacher-assignment/${cid}/class-year`)
   }
 }

@@ -8,7 +8,7 @@
     <v-select
         :items="subjectSelection.items"
         label="วิชาที่สอน"
-        v-model=subjectSelect
+        v-model="subjectSelect"
         class="d-inline-block mr-5"
         solo
     ></v-select>
@@ -19,7 +19,7 @@
         :items="classSelection.items"
         label="ห้องที่สอน"
         class="d-inline-block"
-        v-model=classSelect
+        v-model="classSelect"
         solo
     ></v-select>
 
@@ -34,7 +34,7 @@
         <v-text-field 
         label="หัวข้อ"
         solo
-        v-model=nameInput
+        v-model="nameInput"
         class="d-inline-block"
         ></v-text-field>
 
@@ -61,6 +61,15 @@
         v-model="dateInput"
         ></v-text-field>
 
+        <h2 class="d-inline mx-5 mt-1">ประเภท</h2>
+        <v-select
+        :items="assignmentType.items"
+        label="ประเภท"
+        v-model="assignmentTypeInput"
+        class="d-inline-block mr-5"
+        solo
+        ></v-select>
+
         <h2 class="d-inline mx-5 mt-1">คะแนนเต็ม</h2>
         <v-text-field
         label="คะแนนเต็ม"
@@ -68,6 +77,8 @@
         class="d-inline-block"
         v-model="fullscoreInput"
         ></v-text-field>
+
+
         </div>
 
         <div class="d-block mx-5" >
@@ -94,37 +105,38 @@ import TeacherService from '@/services/TeacherService.js'
         valid: false,
         subjectSelection: {items:[]},
         classSelection: {items:[]},
+        assignmentType: {items:['Homework','Test']},
         subjectInput: '',
         classInput: '',
         nameInput:'',
         descriptionInput:'',
         dateInput:'',
         fullscoreInput:'',
+        assignmentTypeInput: '',
         assignment: [],
         originalAssignments: [],
         date: new Date().toISOString().substr(0, 10),
         menu: false,
         modal: false,
-        menu2: false
+        menu2: false,
+        subjectID: ''
     }),
 
     watch: {
       subjectSelect: function (val) {
-        //Change showing assignment to one with the corresponding subject name
-        let result2 = this.originalAssignments.filter(assignment => assignment.Subject_Name == val);
-        // Change class dropdown to one with the subject Name
         let result3 = this.originalAssignments.filter(assignment => assignment.Subject_Name == val)
         let result4 = [...new Set(result3.map(assignment => assignment.ClassID))]
         this.classSelection.items = result4
+        let result5 = [...new Set(result3.map(assignment => assignment.SubjectID))] 
+        this.subjectID = result5[0]
       },
       classSelect: function (val) {
-        //change assignment to corresponding class
         let result4 = this.originalAssignments.filter(assignment => assignment.ClassID == val && assignment.Subject_Name == this.subjectSelect)
         this.assignments = result4
       }
     },
 
-    mounted() {
+    async mounted() {
         this.getData()
     },
     methods: {
@@ -134,25 +146,31 @@ import TeacherService from '@/services/TeacherService.js'
             var x = await TeacherService.getAssignment(tid)
             this.assignments = x.data
             this.originalAssignments = x.data
-            // set subject
+            console.log(this.originalAssignments)
             let result1 = [...new Set(this.originalAssignments.map(x1 => x1.Subject_Name))]
             this.subjectSelection.items = result1
         },
 
       async createAssignment() {
           let tid = this.$route.params.id
-          let p = {
-              subject : this.subjectInput,
-              class: this.classInput,
+          let x = await TeacherService.getClassYear('classSelect')
+          let y =  x.data[0].Year  
+          console.log(y)
+          let assignment = {
+              subject : this.subjectSelect,
+              class: this.classSelect,
               name: this.nameInput,
               description: this.descriptionInput,
               date: this.dateInput,
-              fullscore: this.fullscoreInput
+              fullscore: this.fullscoreInput,
+              subjectID: this.subjectID,
+              assignmentType: this.assignmentTypeInput,
+              classYear: y,
+              type : this.assignmentTypeInput
           }
-          console.log(p)
-          var y = await TeacherService.createAssignment(tid,p)
-          console.log(y)
-          this.$router.push({ path: `/teacher-assignment/${tid}` })
+          console.log(assignment)
+          TeacherService.createAssignment(tid, assignment).then(this.$router.push({ path: `/teacher-assignment/${tid}` })    
+      )
       },
       goBack() {
           let tid = this.$route.params.id

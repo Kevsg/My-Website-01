@@ -50,5 +50,6 @@ module.exports = (app) => {
   app.get('/teacher-assignment/:tid/classes', TeacherController.getTeachingClasses)
   app.post('/teacher-assignment/:tid/insert', TeacherController.createAssignment)
   app.put('/teacher-assignment/:tid/edit/:aid', TeacherController.editAssignment)
-  app.delete('/teaacher-assignment/:tid/delete/:aid', TeacherController.deleteAssignment)
+  app.delete('/teacher-assignment/delete/:aid', TeacherController.deleteAssignment)
+  app.get('/teacher-assignment/:classid/class-year', TeacherController.getClassYear)
 }
