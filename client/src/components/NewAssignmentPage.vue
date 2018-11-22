@@ -1,6 +1,13 @@
 <template>
 <div>
     <div class="bg2">
+    <v-alert
+      v-model="alert"
+      dismissible
+      type="error"
+    >
+      {{this.errorMessage}}
+    </v-alert>
     <h1 class="my-3 mx-5">การบ้าน</h1>
 
     <div class="mb-2">
@@ -56,7 +63,7 @@
         <div class="f2 mx-5">
         <h2 class="d-inline mr-5 mt-1"> กำหนดส่ง</h2>
         <v-text-field class="d-inline-block m-1"
-        label="YYYY/MM/DD "
+        label="YYYY-MM-DD "
         solo
         v-model="dateInput"
         ></v-text-field>
@@ -119,7 +126,9 @@ import TeacherService from '@/services/TeacherService.js'
         menu: false,
         modal: false,
         menu2: false,
-        subjectID: ''
+        subjectID: '',
+        alert: false,
+        errorMessage: ''
     }),
 
     watch: {
@@ -146,16 +155,12 @@ import TeacherService from '@/services/TeacherService.js'
             var x = await TeacherService.getAssignment(tid)
             this.assignments = x.data
             this.originalAssignments = x.data
-            console.log(this.originalAssignments)
             let result1 = [...new Set(this.originalAssignments.map(x1 => x1.Subject_Name))]
             this.subjectSelection.items = result1
         },
 
       async createAssignment() {
           let tid = this.$route.params.id
-          let x = await TeacherService.getClassYear('classSelect')
-          let y =  x.data[0].Year  
-          console.log(y)
           let assignment = {
               subject : this.subjectSelect,
               class: this.classSelect,
@@ -164,13 +169,16 @@ import TeacherService from '@/services/TeacherService.js'
               date: this.dateInput,
               fullscore: this.fullscoreInput,
               subjectID: this.subjectID,
-              assignmentType: this.assignmentTypeInput,
-              classYear: y,
-              type : this.assignmentTypeInput
+              assignmentType: this.assignmentTypeInput
           }
-          console.log(assignment)
-          TeacherService.createAssignment(tid, assignment).then(this.$router.push({ path: `/teacher-assignment/${tid}` })    
-      )
+          let res = await TeacherService.createAssignment(tid, assignment)
+          if(res.data == 'Error') {
+            this.alert = true
+            this.errorMessage = res.data
+          } else {
+            this.$router.push({ path: `/teacher-assignment/${tid}` })
+          }
+
       },
       goBack() {
           let tid = this.$route.params.id

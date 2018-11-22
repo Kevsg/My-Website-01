@@ -10,8 +10,8 @@ export default {
   deleteAssignment (aid) {
     return Api().delete(`teacher-assignment/delete/${aid}`,aid)
   },
-  updateAssigment (aid, assignment) {
-    return Api().put(`subject/update/${aid}`, assignment)
+  updateAssignment (aid, assignment) {
+    return Api().put(`teacher-assignment/update/${aid}`,{aid,assignment})
   },
   getTeachingSubjects(tid) {
     return Api().get(`teacher-assignment/${tid}/subjects`)

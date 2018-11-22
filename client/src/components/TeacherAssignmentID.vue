@@ -30,81 +30,6 @@
           ></v-select>
         </div>
       </v-toolbar-title>
-
-      <v-dialog v-model="dialogI" max-width="500px">
-         <v-card>
-          <v-card-title>
-            <span class="headline">{{ formTitle }}</span>
-          </v-card-title>
-
-          <v-card-text>
-            <v-container grid-list-md>
-              <v-layout wrap>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.SubjectID" label="Subject ID"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.Name" label="Name"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.Category" label="Category"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.Credit" label="Credit"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.Description" label="Description"></v-text-field>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-card-text>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" flat @click.native="closeI">Cancel</v-btn>
-            <v-btn color="blue darken-1" flat @click.native="saveI">Save</v-btn>
-          </v-card-actions>
-
-        </v-card>
-      </v-dialog>
-      
-
-      <v-dialog v-model="dialogU" max-width="500px">
-        <v-card>
-          <v-card-title>
-            <span class="headline">{{ formTitle }}</span>
-          </v-card-title>
-
-          <v-card-text>
-            <v-container grid-list-md>
-              <v-layout wrap>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field disabled v-model="editedItem.SubjectID" label="Subject ID"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.Name" label="Name"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.Category" label="Category"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.Credit" label="Description"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.Description" label="Description"></v-text-field>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-card-text>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" flat @click.native="closeU">Cancel</v-btn>
-            <v-btn color="blue darken-1" flat @click.native="saveU">Save</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-
     </v-toolbar>
 
     
@@ -144,6 +69,15 @@
   <!-- Edit Page !-->  
     
   <div class="bg2" v-if="showEditPage">
+
+     <v-alert
+      v-model="alert"
+      dismissible
+      type="error"
+    >
+      {{this.errorMessage}}
+    </v-alert>
+
 
     <h1 class="my-3 mx-5">การบ้าน</h1>
 
@@ -206,10 +140,19 @@
         <div class="f2 mx-5">
         <h2 class="d-inline mr-5 mt-1"> กำหนดส่ง</h2>
         <v-text-field class="d-inline-block m-1"
-        label="YYYY/MM/DD "
+        label="YYYY-MM-DD "
         solo
         v-model="EditeddateInput"
         ></v-text-field>
+
+        <h2 class="d-inline mx-5 mt-1">ประเภท</h2>
+        <v-select
+        :items="assignmentType.items"
+        label="ประเภท"
+        v-model="EditedTypeInput"
+        class="d-inline-block mr-5"
+        solo
+        ></v-select>
 
         <h2 class="d-inline mx-5 mt-1">คะแนนเต็ม</h2>
         <v-text-field
@@ -221,7 +164,7 @@
         </div>
 
         <div class="d-block mx-5" >
-        <v-btn class="yellow darken-3" dark>ยืนยัน</v-btn>
+        <v-btn class="yellow darken-3" @click="saveU" dark>ยืนยัน</v-btn>
         
         <v-btn class="yellow darken-3" @click="goBack" dark>ยกเลิก</v-btn>
         </div>
@@ -279,7 +222,7 @@ import TeacherService from '@/services/TeacherService.js'
       errorMessage: '',
       headers: [
         {
-          text: 'WorkID',
+          text: 'ID',
           align: 'left',
           sortable: true,
           value: 'WorkID'
@@ -335,6 +278,7 @@ import TeacherService from '@/services/TeacherService.js'
       classSelection: {items:[]},
       teachingSubjects: {items:[]},
       teachingClasses: {items:[]},
+      assignmentType: {items:['Homework','Test']},
       showIndexPage: true,
       showEditPage: false,
       showCheckPage: false,
@@ -350,7 +294,10 @@ import TeacherService from '@/services/TeacherService.js'
       EditednameInput: '',
       EditeddescriptionInput: '',
       EditeddateInput: '',
-      EditedfullscoreInput: ''
+      EditedfullscoreInput: '',
+      EditedsubjectIDInput: '',
+      EditedWorkID: '',
+      EditedTypeInput: ''
 
     }),
 
@@ -390,6 +337,9 @@ import TeacherService from '@/services/TeacherService.js'
         let result3 = this.originalAssignments.filter(assignment => assignment.Subject_Name == val)
         let result4 = [...new Set(result3.map(assignment => assignment.ClassID))]
         this.classSelection.items = result4
+
+        let result5 = [...new Set(result2.map(assignment => assignment.SubjectID))] 
+        this.EditedsubjectIDInput = result5[0]
       }
     },
 
@@ -420,16 +370,14 @@ import TeacherService from '@/services/TeacherService.js'
       },
       //delete
       deleteItem (item) {
-        console.log('Delete', item.WorkID)
         TeacherService.deleteAssignment(item.WorkID).then((res) => {
           if(res.data == 'Error') {
-            //do something to handle error
-            this.error = true
+            this.alert = true
+            this.errorMessage = res.data
           } else {
             const index = this.assignments.indexOf(item)
             this.assignments.splice(index, 1)
           }
-
         })
       },
       //close popup
@@ -471,27 +419,28 @@ import TeacherService from '@/services/TeacherService.js'
         this.closeI()
       },
       //update
-      saveU () {
-        let subject = {        
-            SubjectID: this.editedItem.SubjectID,
-            Name: this.editedItem.Name,
-            Category: this.editedItem.Category,
-            Credit: this.editedItem.Credit,
-            Description: this.editedItem.Description
+      async saveU () {
+        let A = {        
+            SubjectName: this.EditedsubjectSelect,
+            SubjectID: this.EditedsubjectIDInput,
+            Name: this.EditednameInput,
+            Description: this.EditeddescriptionInput,
+            Date: this.EditeddateInput,
+            Fullscore: this.EditedfullscoreInput,
+            WorkID: this.EditedWorkID,
+            Type: this.EditedTypeInput,
+            Class: this.EditedclassSelect
         }
-        SubjectService.updateSubject(subject.SubjectID, subject).then(res => {
-        if(res.data == 'Error') {
-            this.errorMessage = 'Error trying to update subject info.'
+        await TeacherService.updateAssignment(A.WorkID,A).then(res => {
+          if(res.data == 'Error') {
+            this.errorMessage = 'Error trying to update assignment info.'
             this.alert = true
-        } else {
-          if (this.editedIndex > -1) {
-            Object.assign(this.assignments[this.editedIndex], this.editedItem)
           } else {
-            this.assignments.push(this.editedItem)
+              this.getData()
+              this.goBack()
           }
-        }
         })
-        this.closeU()
+
       },
       async getData () {
         let tid = this.$route.params.id
@@ -507,12 +456,18 @@ import TeacherService from '@/services/TeacherService.js'
         this.$router.push({ path: `/teacher-assignment/${Tid}/create` })
       },
       changeToEditPage(work) {
+          let dd =null
+          if(work.Due_date != null) {
+            dd = work.Due_date.split('T')[0]
+          }
+          this.EditedWorkID = work.WorkID
           this.EditedsubjectSelect = work.Subject_Name
           this.EditednameInput = work.Name
           this.EditedclassSelect = work.ClassID
-          this.EditeddescriptionInput = ''
-          this.EditeddateInput = ''
-          this.EditedfullscoreInput = ''
+          this.EditeddescriptionInput = work.Description
+          this.EditeddateInput = dd
+          this.EditedfullscoreInput = work.Full_Score
+          this.EditedTypeInput = work.Type
           this.showIndexPage = false
           this.showCheckPage = false
           this.showEditPage = true
