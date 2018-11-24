@@ -6,6 +6,7 @@ const AttendanceController = require('./controllers/crude/AttendanceController')
 const SubjectController = require('./controllers/crude/SubjectController')
 const QueryController = require('./controllers/QueryController')
 const TeacherController = require('./controllers/functional/TeacherController')
+const ParentHController = require('./controllers/functional/ParentHController')
 
 module.exports = (app) => {
   // Parent Route
@@ -52,4 +53,7 @@ module.exports = (app) => {
   app.put('/teacher-assignment/update/:aid', TeacherController.editAssignment)
   app.delete('/teacher-assignment/delete/:aid', TeacherController.deleteAssignment)
   app.get('/teacher-assignment/:classid/class-year', TeacherController.getClassYear)
+  // Parent Assignment
+  app.get('/parent-assignment/:pid/index', ParentHController.index)
+  app.get(`/parent-assignment/:sid/:wid`, ParentHController.isThisTaskCheck)
 }

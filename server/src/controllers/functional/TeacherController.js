@@ -27,10 +27,13 @@ module.exports = {
   },
   async createAssignment (req, res) {
     let assignment = req.body.assignment
-    const q = `INSERT INTO s5project.work (Name, Full_Score, Description, Type, Due_date) VALUES (?, ?, ?, ?, ?); SET @pathId := LAST_INSERT_ID(); INSERT INTO s5project.assign (workid, classid, subjectid) VALUES (@pathId, '501', '0000000002');`
+    assignment.fullscore = assignment.fullscore === '' ? null : assignment.fullscore
+    assignment.date = assignment.date === '' ? null : assignment.date
+    const q = `INSERT INTO s5project.work (Name, Full_Score, Description, Type, Due_date) VALUES (?, ?, ?, ?, ?); SET @pathId := LAST_INSERT_ID(); INSERT INTO s5project.assign (workid, classid, subjectid) VALUES (@pathId, ?, ?);`
     let l = [assignment.name, assignment.fullscore, assignment.description, assignment.assignmentType, assignment.date, assignment.class, assignment.subjectID]
     connection.query(q, l, function (err, rows) {
       if (err) {
+        console.log(err)
         res.status(200).send('Error')
       } else {
         console.log('The solutions is: ', rows)

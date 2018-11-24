@@ -23,6 +23,7 @@ import GetTeacherID from '@/components/GetTeacherID'
 import TeacherAssignmentID from '@/components/TeacherAssignmentID'
 import NewAssignmentPage from '@/components/NewAssignmentPage'
 import TeacherAttendanceID from '@/components/TeacherAttendanceID'
+import ParentAssignmentID from '@/components/ParentAssignmentID'
 
 Vue.use(Router)
 
@@ -132,8 +133,8 @@ export default new Router({
       component: CourseGrade
     },
     {
-      path: '/teacher-assignment',
-      name: 'teacher-assignment',
+      path: '/assignment',
+      name: 'assignment',
       component: GetTeacherID
     },
     {
@@ -155,6 +156,11 @@ export default new Router({
       path: '/teacher-attendance/:id',
       name: 'teacher-attendancet-id',
       component: TeacherAttendanceID
+    },
+    {
+      path: '/parent-assignment/:id',
+      name: 'parent-assignment-id',
+      component: ParentAssignmentID 
     }
   ]
 })

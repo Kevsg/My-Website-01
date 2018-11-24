@@ -8,7 +8,7 @@
 
       <ul>
         <li>ข่าวสาร</li>
-        <router-link :to="{ name: 'teacher-assignment'}"><li>การบ้าน</li></router-link>
+        <router-link :to="{ name: 'assignment'}"><li>การบ้าน</li></router-link>
         <li>ตารางเรียน/ตารางสอบ</li>
         <li>ข้อมูลนักเรียน</li>       
         <router-link :to="{ name: 'teacher-attendance'}"><li>การเข้าเรียน</li></router-link>
