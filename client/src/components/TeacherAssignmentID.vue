@@ -12,8 +12,10 @@
 
     <v-toolbar flat color="white" class="px-3 my-1">
       <v-toolbar-title class="tableTitle display-1 d-flex-inline" > <div class="t">การบ้าน</div>
-        <v-btn slot="activator" class="my-5 mx-3" color="yellow darken-3" dark @click="gotoInsert">+  เพิ่ม</v-btn>
-        <div class="filter d-inline-flex">
+        <v-btn slot="activator" class="my-1 mx-3" color="yellow darken-3" dark @click="gotoInsert">+  เพิ่ม</v-btn>
+      </v-toolbar-title>
+      <v-spacer class="d-inline-flex"/>
+        <div class="d-inline">
           <v-select
             :items="subjectSelection.items"
             label="วิชาที่สอนทั้งหมด"
@@ -23,19 +25,18 @@
           ></v-select>
           <v-select
             :items="classSelection.items"
-            label="ห้องที่สอนทั้งหมด"
+            label="การบ้านทั้งหมด"
             solo
             class="filter2 mx-3"
             v-model="classSelect"
           ></v-select>
         </div>
-      </v-toolbar-title>
     </v-toolbar>
 
     
     <v-data-table
       :headers="headers"
-      :items="assignments"
+      :items="assignments" 
       class="elevation-1 my-4 mx-5"
     >
       <template slot="items" slot-scope="props">
@@ -61,7 +62,7 @@
       </template>
       
       <template slot="no-data">
-        <h1>No Results</h1>
+        <h1 class="t subheading">No Results</h1>
       </template>
     </v-data-table>
     </div>
@@ -556,5 +557,7 @@ import TeacherService from '@/services/TeacherService.js'
     justify-content: space-around;
     padding-top:5px;
 }
+
+
 
 </style>

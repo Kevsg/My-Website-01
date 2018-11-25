@@ -8,8 +8,8 @@
             ></v-text-field>
             <div>
                
-                <v-btn color="yellow darken-3" dark depressed @click="gotoNextTeacherPage">Teacher Login</v-btn>
-                <v-btn color="teal lighten-1" dark depressed @click="gotoNextParentPage">Parent Login</v-btn>
+                <v-btn color="yellow darken-3 b ml-0" dark depressed @click="gotoNextTeacherPage">Teacher Login</v-btn>
+                <v-btn color="teal lighten-1 b" dark depressed @click="gotoNextParentPage">Parent Login</v-btn>
 
             </div>
         </v-form>
@@ -46,9 +46,16 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css?family=Kanit|Trirong');
+
 .bg {
     background-color: white;
     margin: 30px;
+    font-family: 'Kanit', sans-serif !important;
+}
+
+.b {
+  font-family: 'Kanit', sans-serif !important;
 }
 </style>
 

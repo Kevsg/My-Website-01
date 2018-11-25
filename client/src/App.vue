@@ -3,7 +3,7 @@
   <div class="dgrid">
     <div class="sidebar">
 
-          <img src="../src/assets/owl.png" width="150px" class="logo">
+          <img src="../src/assets/owl.png" class="logo">
           <p>Smart School <br> Student Support System</p>
 
       <ul>
@@ -59,8 +59,10 @@ ul {
 }
 
 .logo {
-  margin:10px;
-  margin-left:30px;
+  margin-top:10px;
+  margin-bottom:10px;
+  margin-left:2vw;
+  width:10vw;
 }
 
 a {
@@ -76,7 +78,7 @@ li {
   padding-bottom:20px;
   font-family: 'Kanit', sans-serif;
   color: #424242;
-  padding-left: 1em;
+  padding-left: 1vw;
 }
 
 li:hover {

@@ -10,32 +10,38 @@
       {{this.errorMessage}}
     </v-alert>
 
-      <v-dialog v-model="dialogV" max-width="50vw">
-        <v-card>
+      <v-dialog v-model="dialogV" max-width="50vw" class="">
+        <v-card class="pa-5">
           <v-card-title>
-            <span class="headline">{{this.viewWorkName}}</span>
+            <span class="display-1 t">{{this.viewWorkName}}</span>
           </v-card-title>
 
+          <hr style="border: 2px solid#FFE082" />
+
           <v-card-text>
-            <v-container grid-list-md>
-              <v-layout wrap>
+
                 <v-flex xs12 sm6 md4>
-                  <v-text-field  label="Dessert name"></v-text-field>
+                  <h3>วิชา</h3>
+                  <p>{{this.viewSubjectName}}</p>
                 </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field label="Calories"></v-text-field>
+                <br/>
+                <v-flex>
+                  <h3>รายละเอียด</h3>
+                  <br/>
+                  <p> {{this.viewDescription}}</p>
                 </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field label="Fat (g)"></v-text-field>
+                <br/>
+                <v-flex>
+                  <h3>กำหนดส่ง</h3>
+                  <br/>
+                  <p> {{this.viewDueDate}}</p>
                 </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field label="Carbs (g)"></v-text-field>
+                <br/>
+                <v-flex>
+                  <h3>ตรวจแล้ว</h3> 
+                  <v-checkbox class="mr-0" color="yellow darken-2" readonly v-model="this.viewCheck"/>
                 </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field label="Protein (g)"></v-text-field>
-                </v-flex>
-              </v-layout>
-            </v-container>
+
           </v-card-text>
 
         </v-card>
@@ -81,7 +87,7 @@
         </td>
       </template>
       <template slot="no-data">
-        <h1>No Results</h1>
+        <h1 class="t subheading">No Results</h1>
       </template>
     </v-data-table>
     </div>
@@ -110,7 +116,9 @@ export default {
         originalAssignments: [],
         assignments:[],
         dialogV: false,
-        viewWorkName: ''
+        viewWorkName: '',
+        viewSubjectName: '',
+        viewDescription: ''
     }),
     watch : {
       subjectSelect: function (val) {
@@ -145,6 +153,10 @@ export default {
       viewDialog(item) {
         console.log(item)
         this.viewWorkName = item.wName
+        this.viewSubjectName = item.sjName
+        this.viewDescription = item.wDescription === '' ? 'ไม่มีรายละเอียด' : item.wDescription
+        this.viewDueDate = item.wDueDate === null ? 'ไม่มีกำหนด' : item.wDueDate
+        this.viewCheck = item.check
         this.dialogV = true;
       },
       closeDialog() {
@@ -157,6 +169,15 @@ export default {
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css?family=Kanit|Trirong');
+
+h3 {
+  font-family: 'Kanit', sans-serif !important;
+  font-size: 1.5em;
+}
+
+p {
+  text-align: left;
+}
 
 .ab {
   display: flex;
