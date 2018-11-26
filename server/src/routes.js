@@ -48,7 +48,7 @@ module.exports = (app) => {
   // Teacher Route
   app.get('/teacher-assignment/:tid', TeacherController.findAssignments)
   app.get('/teacher-assignment/:tid/subjects', TeacherController.getTeachingSubjects)
-  app.get('/teacher-assignment/:tid/classes', TeacherController.getTeachingClasses)
+  app.get('/teacher-assignment/:tid/:sid', TeacherController.getTeachingClasses)
   app.post('/teacher-assignment/:tid/insert', TeacherController.createAssignment)
   app.put('/teacher-assignment/update/:aid', TeacherController.editAssignment)
   app.delete('/teacher-assignment/delete/:aid', TeacherController.deleteAssignment)

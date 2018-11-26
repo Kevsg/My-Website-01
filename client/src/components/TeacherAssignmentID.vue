@@ -20,14 +20,14 @@
             :items="subjectSelection.items"
             label="วิชาที่สอนทั้งหมด"
             solo
-            class="filter1 mx-3 "
+            class="filter1 mx-3 yy"
             v-model="subjectSelect"
           ></v-select>
           <v-select
             :items="classSelection.items"
             label="การบ้านทั้งหมด"
             solo
-            class="filter2 mx-3"
+            class="filter2 mx-3 yy"
             v-model="classSelect"
           ></v-select>
         </div>
@@ -37,7 +37,7 @@
     <v-data-table
       :headers="headers"
       :items="assignments" 
-      class="elevation-1 my-4 mx-5"
+      class="elevation-1 my-4 mx-5 yy"
     >
       <template slot="items" slot-scope="props">
         <td >{{ props.item.WorkID }}</td>
@@ -558,6 +558,8 @@ import TeacherService from '@/services/TeacherService.js'
     padding-top:5px;
 }
 
-
+.yy {
+  font-family: 'Kanit', sans-serif;
+}
 
 </style>

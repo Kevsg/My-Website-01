@@ -16,8 +16,8 @@ export default {
   getTeachingSubjects(tid) {
     return Api().get(`teacher-assignment/${tid}/subjects`)
   },
-  getTeachingClasses(tid) {
-    return Api().get(`teacher-assignment/${tid}/classes`)
+  getTeachingClasses(tid, sid) {
+    return Api().get(`teacher-assignment/${tid}/${sid}`, {tid,sid})
   },
   getClassYear(cid) {
     return Api().get(`teacher-assignment/${cid}/class-year`)

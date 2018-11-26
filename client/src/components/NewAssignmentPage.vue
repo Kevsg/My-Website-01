@@ -128,20 +128,18 @@ import TeacherService from '@/services/TeacherService.js'
         menu2: false,
         subjectID: '',
         alert: false,
-        errorMessage: ''
+        errorMessage: '',
+        subject: ''
     }),
 
     watch: {
-      subjectSelect: function (val) {
-        let result3 = this.originalAssignments.filter(assignment => assignment.Subject_Name == val)
-        let result4 = [...new Set(result3.map(assignment => assignment.ClassID))]
-        this.classSelection.items = result4
-        let result5 = [...new Set(result3.map(assignment => assignment.SubjectID))] 
-        this.subjectID = result5[0]
-      },
-      classSelect: function (val) {
-        let result4 = this.originalAssignments.filter(assignment => assignment.ClassID == val && assignment.Subject_Name == this.subjectSelect)
-        this.assignments = result4
+      subjectSelect: async function (val) {
+        let tid  = this.$route.params.id
+        let r = this.subject.filter(s => s.Name == val)
+        this.subjectID = r[0].SubjectID
+        var x = await TeacherService.getTeachingClasses(tid, this.subjectID)
+        let y = x.data.map(y => y.classid)
+        this.classSelection.items = y
       }
     },
 
@@ -151,11 +149,11 @@ import TeacherService from '@/services/TeacherService.js'
     methods: {
 
         async getData () {
-            let tid = this.$route.params.id
-            var x = await TeacherService.getAssignment(tid)
-            this.assignments = x.data
-            this.originalAssignments = x.data
-            let result1 = [...new Set(this.originalAssignments.map(x1 => x1.Subject_Name))]
+            let tid  = this.$route.params.id
+            // should get Both Teaching Subject Name and ID
+            var x = await TeacherService.getTeachingSubjects(tid)
+            this.subject = x.data
+            let result1 = [...new Set(this.subject.map(x1 => x1.Name))]
             this.subjectSelection.items = result1
         },
 

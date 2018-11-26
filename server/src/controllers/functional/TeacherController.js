@@ -18,8 +18,11 @@ module.exports = {
     })
   },
   async getTeachingClasses (req, res) {
-    const q = 'select distinct Te.ClassID, C.Name, C.Room from Teacher T, Teach Te, Class1 C where T.TeacherID = Te.TeacherID AND Te.ClassID = C.ClassID and T.TeacherID = ?;'
-    connection.query(q, req.params.tid, function (err, rows) {
+    const q = `select T.classid from Teach T where T.teacherid = ? and T.subjectid = ?;`
+    let tid = req.params.tid
+    let sid = req.params.sid
+    let l = [tid, sid]
+    connection.query(q, l, function (err, rows) {
       if (err) throw err
       console.log('The solutions is: ', rows)
       res.send(rows)

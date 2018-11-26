@@ -75,7 +75,7 @@
     <v-data-table 
       :headers="headers"
       :items="assignments"
-      class="elevation-1 my-4 mx-5"
+      class="elevation-1 my-4 mx-5 yy"
     >
     
       <template slot="items" slot-scope="props">
@@ -231,6 +231,10 @@ p {
     display: flex;
     justify-content: space-around;
     padding-top:5px;
+}
+
+.yy {
+  font-family: 'Kanit', sans-serif;
 }
 
 </style>
